@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 
-public abstract class State<T> where T: StateMachine<T>
+public abstract class State
 {
-	protected T StateMachine { get; private set; }
+	protected StateMachine StateMachine { get; private set; }
 
-	public State(T stateMachine)
+	public State(StateMachine stateMachine)
 	{
 		StateMachine = stateMachine;
 	}
 
+	// ReSharper disable Unity.PerformanceAnalysis
 	public virtual IEnumerator OnStart()
 	{
 		yield break;
