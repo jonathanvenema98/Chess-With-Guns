@@ -1319,3 +1319,4 @@ MonoBehaviour:
   boardTilemap: {fileID: 550250725}
   tileA: {fileID: 11400000, guid: 4ffb16487ed77044bbce527e2bcffb63, type: 2}
   tileB: {fileID: 11400000, guid: 3c54835d6ada23b4485ed43fdf66042d, type: 2}
+  pieceTilemap: {fileID: 0}

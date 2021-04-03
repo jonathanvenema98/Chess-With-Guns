@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class BoardController : Singleton<BoardController>
@@ -9,13 +8,23 @@ public class BoardController : Singleton<BoardController>
 	[SerializeField] private Tilemap boardTilemap;
 	[SerializeField] private Tile tileA;
 	[SerializeField] private Tile tileB;
+
+	private Vector2Int worldPositionOffset;
+	private IBoardItem[,] board;
 	
-	public Vector2Int BoardSize
+	public static Vector2Int BoardSize
 	{
 		get
 		{
-			return boardSize;
+			return Instance.boardSize;
 		}
+	}
+	
+	// Use this for initialization
+	private void Start ()
+	{
+		UpdateBoard();
+		board = new IBoardItem[boardSize.x, boardSize.y];
 	}
 
 	[InspectorButton]
@@ -33,13 +42,13 @@ public class BoardController : Singleton<BoardController>
 
 		//Clear the previous board
 		boardTilemap.ClearAllTiles();
-		Vector2Int bottomLeftCorner = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
+		worldPositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
 
 		for (int x = 0; x < boardSize.x; x++)
 		{
 			for (int y = 0; y < boardSize.y; y++)
 			{
-				Vector3Int tilePosition = new Vector3Int(bottomLeftCorner.x + x, bottomLeftCorner.y + y, 0);
+				Vector3Int tilePosition = new Vector3Int(x - worldPositionOffset.x, y - worldPositionOffset.y, 0);
 				Tile tile = DetermineTile(x, y);
 				
 				boardTilemap.SetTile(tilePosition, tile);
@@ -54,15 +63,72 @@ public class BoardController : Singleton<BoardController>
 			? tileA
 			: tileB;
 	}
-	
-	// Use this for initialization
-	private void Start ()
+
+	public static IBoardItem GetBoardItemAt(Vector2Int position)
 	{
-		UpdateBoard();
+		return IsWithinBoard(position)
+			? Instance.board[position.x, position.y]
+			: null;
+	}
+
+	public static T GetBoardItemAt<T>(Vector2Int position) where T: IBoardItem
+	{
+		IBoardItem boardItem = GetBoardItemAt(position);
+		if (boardItem is T)
+			return (T) boardItem;
+		
+		return default(T);
+	}
+
+	public static bool IsBoardItemAt(Vector2Int position)
+	{
+		return GetBoardItemAt(position) != null;
+	}
+
+	public static bool IsObstacleAt(Vector2Int position)
+	{
+		return IsBoardItemAt(position) && GetBoardItemAt(position) is Obstacle;
+	}
+
+	public static bool IsPieceAt(Vector2Int position)
+	{
+		//TODO: Replace this with 'is Piece' when class is implemeted
+		return IsBoardItemAt(position) && !(GetBoardItemAt(position) is Obstacle);
+	}
+
+	public static bool IsWithinBoard(Vector2Int position)
+	{
+		return position.x >= 0 && position.x < BoardSize.x
+			&& position.y >= 0 && position.y < BoardSize.y;
+	}
+
+	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
+	{
+		return new Vector3(
+			boardPosition.x - Instance.worldPositionOffset.x + 0.5F,
+			boardPosition.y - Instance.worldPositionOffset.y + 0.5F);
 	}
 	
-	// Update is called once per frame
-	private void Update () {
+	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: MonoBehaviour, IBoardItem
+	{
+		if (IsBoardItemAt(to) || !IsWithinBoard(to))
+			return false;
 		
+		RemoveBoardItemAt(boardItem.BoardPosition);
+		SetBoardItemAt(boardItem, to);
+		return true;
 	}
+
+	private static void RemoveBoardItemAt(Vector2Int position)
+	{
+		Instance.board[position.x, position.y] = null;
+	}
+
+	private static void SetBoardItemAt<T>(T boardItem, Vector2Int position) where T: MonoBehaviour, IBoardItem
+	{
+		Instance.board[position.x, position.y] = boardItem;
+		boardItem.BoardPosition = position;
+		boardItem.transform.position = BoardPositionToWorldPosition(position);
+	}
+
 }
