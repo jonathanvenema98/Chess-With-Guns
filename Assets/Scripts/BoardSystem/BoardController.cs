@@ -30,6 +30,8 @@ public class BoardController : Singleton<BoardController>
 	[InspectorButton]
 	private void UpdateBoard()
 	{
+		worldPositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
+		
 		if (tileA == null || tileB == null || boardTilemap == null)
 		{
 			Debug.LogWarning("Make sure all the necessary assets are set in the inspector before trying to update the board");
@@ -42,7 +44,6 @@ public class BoardController : Singleton<BoardController>
 
 		//Clear the previous board
 		boardTilemap.ClearAllTiles();
-		worldPositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
 
 		for (int x = 0; x < boardSize.x; x++)
 		{
@@ -129,6 +130,7 @@ public class BoardController : Singleton<BoardController>
 		Instance.board[position.x, position.y] = boardItem;
 		boardItem.BoardPosition = position;
 		boardItem.transform.position = BoardPositionToWorldPosition(position);
+		
 	}
 
 }
