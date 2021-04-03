@@ -1,0 +1,19 @@
+TODO/system architecture
+
+Pixel art for characters
+(king, pawn)
+
+Board created in Unity
+series of tiles, chuck in grid
+to enable variation in size
+
+State machine for player mechanics/states/game states
+
+Board controller
+2 types of tiles
+2 dimensions
+game start: generate Board
+
+Menu system (ui systems)
+
+pawn (piece) controller

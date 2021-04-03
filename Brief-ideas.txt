@@ -1,0 +1,39 @@
+Minimum Viable Product:
+
+1 piece type
+each player has x number of starting pieces
+Game has start, playable, win condition, reset (main menu system (basic))
+Player pieces can be destroyed
+PvP ( 2 players )
+Unity based
+
+Player mechanics:
+Pawn
+move forward (1st move of each pawn in the game has option of 1 or 2 spaces forward)
+Attack range: 2 squares forward, 1 diagonal
+King
+move 1 in any direction
+Attack range: 1 any direction
+
+2 actions per turn (any combination/order): 
+move
+attack
+(not compulsary to use both actions)
+
+Next player?
+
+Win conditions:
+Kill King
+
+
+Optional extras:
+
+Can move sideways
+Multiple game modes?
+Win condition:
+Opponent has no move
+Capture enemy base (certain # or troops around enemy base)
+Domination (kill everyone) (potentially too tedious)
+Capture the flag
+ect.
+
