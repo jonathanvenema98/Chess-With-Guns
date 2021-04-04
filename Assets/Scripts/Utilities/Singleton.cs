@@ -8,6 +8,9 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
     {
         get
         {
+            if (Application.isEditor)
+                _instance = FindObjectOfType<T>();
+            
             if (_instance == null)
                 CreateInstance();
             return _instance;

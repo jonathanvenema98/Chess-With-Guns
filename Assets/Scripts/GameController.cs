@@ -49,7 +49,6 @@ public class GameController : Singleton<GameController>
 	// Use this for initialization
 	private void Start ()
 	{
-
 	}
 	
 	// Update is called once per frame

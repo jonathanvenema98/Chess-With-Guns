@@ -1,12 +1,21 @@
-using UnityEngine;
-
-public abstract class StateMachine : MonoBehaviour
+public abstract class StateMachine : Singleton<StateMachine>
 {
-    protected State State { get; private set; }
+    public State State { get; private set; }
 
     public void SetState(State state)
     {
+        if (State != null)
+            State.OnExit();
+        
         State = state;
-        StartCoroutine(State.OnStart());
+        State.OnStart();
+    }
+
+    private void Update()
+    {
+        if (State == null)
+            return;
+        
+        State.OnUpdate();
     }
 }

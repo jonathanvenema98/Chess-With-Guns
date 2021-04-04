@@ -108,7 +108,8 @@ public class BoardController : Singleton<BoardController>
 
 	public static bool IsWithinBoard(Vector2Int position)
 	{
-		return position.x >= 0 && position.x < BoardSize.x
+		return Application.isPlaying
+			&& position.x >= 0 && position.x < BoardSize.x
 			&& position.y >= 0 && position.y < BoardSize.y;
 	}
 

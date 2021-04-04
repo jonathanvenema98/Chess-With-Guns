@@ -2,17 +2,16 @@
 
 public abstract class State
 {
-	protected StateMachine StateMachine { get; private set; }
-
-	public State(StateMachine stateMachine)
+	public virtual void OnStart()
 	{
-		StateMachine = stateMachine;
+	}
+	
+	public virtual void OnUpdate()
+	{
 	}
 
-	// ReSharper disable Unity.PerformanceAnalysis
-	public virtual IEnumerator OnStart()
+	public virtual void OnExit()
 	{
-		yield break;
 	}
 
 	public virtual IEnumerator OnMove()
