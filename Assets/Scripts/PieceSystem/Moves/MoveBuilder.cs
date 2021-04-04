@@ -112,7 +112,7 @@ public class MoveBuilder
 	//This is a bit of a mess, so if anyone has a better way to do this, please go ahead!
 	private bool IsValid(Vector2Int move, MoveOptions moveOptions, bool moveOptionIsTrue)
 	{
-		if (moveOptions.HasFlag(MoveOptions.FirstTurn) && !GameController.FirstTurn)
+		if (moveOptions.HasFlag(MoveOptions.FirstTurn) && !GameController.FirstRound)
 		{
 			return false;
 		}

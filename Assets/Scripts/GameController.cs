@@ -5,13 +5,13 @@ public class GameController : Singleton<GameController>
 	[SerializeField] private Obstacle boardItem;
 	[SerializeField] private Vector2Int target;
 	
-	public static int TurnCount { get; private set; }
+	public static int Round { get; private set; }
 	
 	public static Team CurrentTeam { get; private set; }
 
-	public static bool FirstTurn
+	public static bool FirstRound
 	{
-		get { return TurnCount == 0; }
+		get { return Round == 1; }
 	}
 	
 	[InspectorButton]
@@ -34,16 +34,16 @@ public class GameController : Singleton<GameController>
 		// 	.ForEach(m => Debug.Log(m));
 	}
 	
-	public static void NextTurn()
+	public static void NextRound()
 	{
-		TurnCount++;
+		Round++;
 	}
 
 	public static void SetCurrentTeam(Team team)
 	{
 		CurrentTeam = team;
 		if (CurrentTeam == Team.White)
-			NextTurn();
+			NextRound();
 	}
 
 	// Use this for initialization
