@@ -11,6 +11,7 @@ public class BoardController : Singleton<BoardController>
 
 	private Vector2Int worldPositionOffset;
 	private IBoardItem[,] board;
+	private int boardLength;
 	
 	public static Vector2Int BoardSize
 	{
@@ -19,12 +20,21 @@ public class BoardController : Singleton<BoardController>
 			return Instance.boardSize;
 		}
 	}
+
+	public static int BoardLength
+	{
+		get
+		{
+			return Instance.boardLength;
+		}
+	}
 	
 	// Use this for initialization
 	private void Start ()
 	{
 		UpdateBoard();
 		board = new IBoardItem[boardSize.x, boardSize.y];
+		boardLength = Mathf.Max(boardSize.x, boardSize.y);
 	}
 
 	[InspectorButton]
@@ -93,8 +103,7 @@ public class BoardController : Singleton<BoardController>
 
 	public static bool IsPieceAt(Vector2Int position)
 	{
-		//TODO: Replace this with 'is Piece' when class is implemeted
-		return IsBoardItemAt(position) && !(GetBoardItemAt(position) is Obstacle);
+		return IsBoardItemAt(position) && GetBoardItemAt(position) is IPiece;
 	}
 
 	public static bool IsWithinBoard(Vector2Int position)
@@ -110,7 +119,7 @@ public class BoardController : Singleton<BoardController>
 			boardPosition.y - Instance.worldPositionOffset.y + 0.5F);
 	}
 	
-	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: MonoBehaviour, IBoardItem
+	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: IBoardItem
 	{
 		if (IsBoardItemAt(to) || !IsWithinBoard(to))
 			return false;
@@ -120,17 +129,27 @@ public class BoardController : Singleton<BoardController>
 		return true;
 	}
 
+	public static bool IsFriendlyAt(Vector2Int boardPosition, Team playerTeam)
+	{
+		IPiece piece = GetBoardItemAt<IPiece>(boardPosition);
+		return piece != null && piece.Team == playerTeam;
+	}
+	
+	public static bool IsEnemyAt(Vector2Int boardPosition, Team playerTeam)
+	{
+		IPiece piece = GetBoardItemAt<IPiece>(boardPosition);
+		return piece != null && piece.Team != playerTeam;
+	}
+
 	private static void RemoveBoardItemAt(Vector2Int position)
 	{
 		Instance.board[position.x, position.y] = null;
 	}
 
-	private static void SetBoardItemAt<T>(T boardItem, Vector2Int position) where T: MonoBehaviour, IBoardItem
+	private static void SetBoardItemAt<T>(T boardItem, Vector2Int position) where T: IBoardItem
 	{
 		Instance.board[position.x, position.y] = boardItem;
 		boardItem.BoardPosition = position;
-		boardItem.transform.position = BoardPositionToWorldPosition(position);
-		
+		boardItem.Transform.position = BoardPositionToWorldPosition(position);
 	}
-
 }

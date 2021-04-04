@@ -11,7 +11,7 @@ public class Begin : State
     {
         Debug.Log("The match has started");
         
-        StateMachine.SetState(new PlayerTurn(StateMachine));
+        StateMachine.SetState(new WhiteTurn(StateMachine));
         yield break;
     }
 }
