@@ -32,6 +32,6 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         {
             name = typeof(T).Name
         };
-        gameObject.AddComponent<T>();
+        _instance = gameObject.AddComponent<T>();
     }
 }
