@@ -4,33 +4,38 @@ using UnityEngine.Tilemaps;
 public class BoardController : Singleton<BoardController>
 {
 	[SerializeField] private Vector2Int boardSize;
-	
+
+	[SerializeField] private int unitsPerTile = 4;
 	[SerializeField] private Tilemap boardTilemap;
 	[SerializeField] private Tile tileA;
 	[SerializeField] private Tile tileB;
-
-	private Vector2Int worldPositionOffset;
+	
+	private Vector2Int tilePositionOffset;
 	private IBoardItem[,] board;
 	private int boardLength;
-	
+
 	public static Vector2Int BoardSize
 	{
-		get
-		{
-			return Instance.boardSize;
-		}
+		get { return Instance.boardSize; }
 	}
 
 	public static int BoardLength
 	{
-		get
-		{
-			return Instance.boardLength;
-		}
+		get { return Instance.boardLength; }
 	}
-	
+
+	public static int UnitsPerTile
+	{
+		get { return Instance.unitsPerTile; }
+	}
+
+	public static float HalfTileLength
+	{
+		get { return UnitsPerTile / 2F; }
+	}
+
 	// Use this for initialization
-	private void Start ()
+	private void Start()
 	{
 		UpdateBoard();
 		board = new IBoardItem[boardSize.x, boardSize.y];
@@ -40,31 +45,34 @@ public class BoardController : Singleton<BoardController>
 	[InspectorButton]
 	private void UpdateBoard()
 	{
-		worldPositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
-		
+		tilePositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
+
 		if (tileA == null || tileB == null || boardTilemap == null)
 		{
-			Debug.LogWarning("Make sure all the necessary assets are set in the inspector before trying to update the board");
+			Debug.LogWarning(
+				"Make sure all the necessary assets are set in the inspector before trying to update the board");
 			return;
 		}
 
 		//The board is already the correct size
-		if (boardTilemap.size.x == boardSize.x && boardTilemap.size.y == boardSize.y)
+		if (boardTilemap.size.x / UnitsPerTile == boardSize.x && boardTilemap.size.y / UnitsPerTile == boardSize.y)
 			return;
 
 		//Clear the previous board
 		boardTilemap.ClearAllTiles();
+		boardTilemap.layoutGrid.cellSize = new Vector3(1, 1) * unitsPerTile;
 
 		for (int x = 0; x < boardSize.x; x++)
 		{
 			for (int y = 0; y < boardSize.y; y++)
 			{
-				Vector3Int tilePosition = new Vector3Int(x - worldPositionOffset.x, y - worldPositionOffset.y, 0);
+				Vector3Int tilePosition = new Vector3Int(x - tilePositionOffset.x, y - tilePositionOffset.y, 0);
 				Tile tile = DetermineTile(x, y);
-				
+
 				boardTilemap.SetTile(tilePosition, tile);
 			}
 		}
+
 		boardTilemap.ResizeBounds();
 	}
 
@@ -82,12 +90,12 @@ public class BoardController : Singleton<BoardController>
 			: null;
 	}
 
-	public static T GetBoardItemAt<T>(Vector2Int position) where T: IBoardItem
+	public static T GetBoardItemAt<T>(Vector2Int position) where T : IBoardItem
 	{
 		IBoardItem boardItem = GetBoardItemAt(position);
 		if (boardItem is T)
 			return (T) boardItem;
-		
+
 		return default(T);
 	}
 
@@ -109,17 +117,25 @@ public class BoardController : Singleton<BoardController>
 	public static bool IsWithinBoard(Vector2Int position)
 	{
 		return Application.isPlaying
-			&& position.x >= 0 && position.x < BoardSize.x
-			&& position.y >= 0 && position.y < BoardSize.y;
+		       && position.x >= 0 && position.x < BoardSize.x
+		       && position.y >= 0 && position.y < BoardSize.y;
 	}
 
 	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
 	{
 		return new Vector3(
-			boardPosition.x - Instance.worldPositionOffset.x + 0.5F,
-			boardPosition.y - Instance.worldPositionOffset.y + 0.5F);
+			(boardPosition.x - Instance.tilePositionOffset.x) * UnitsPerTile + HalfTileLength,
+			(boardPosition.y - Instance.tilePositionOffset.y) * UnitsPerTile + HalfTileLength);
 	}
-	
+
+	//To be tested:
+	public static Vector2Int WorldPositionToBoardPosition(Vector2 worldPosition)
+	{
+		return new Vector2Int(
+			Mathf.FloorToInt(worldPosition.x / UnitsPerTile - HalfTileLength) + Instance.tilePositionOffset.x,
+			Mathf.FloorToInt(worldPosition.y / UnitsPerTile - HalfTileLength) + Instance.tilePositionOffset.y);
+	}
+
 	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: IBoardItem
 	{
 		if (IsBoardItemAt(to) || !IsWithinBoard(to))

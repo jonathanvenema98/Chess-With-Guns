@@ -12,14 +12,6 @@ public class PauseMenu : MonoBehaviour
 
     private State previousState;
 
-    public class PausedState : State
-    {
-        public override void OnStart()
-        {
-
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
