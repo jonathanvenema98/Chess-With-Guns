@@ -29,14 +29,36 @@ public class BoardController : Singleton<BoardController>
 		get { return Instance.unitsPerTile; }
 	}
 
-	public static float HalfTileLength
+	public static float HalfUnitsPerTile
 	{
 		get { return UnitsPerTile / 2F; }
 	}
 
-	// Use this for initialization
-	private void Start()
+	public static Vector2 BottomLeftCorner
 	{
+		get
+		{
+			return new Vector2(
+				-Instance.tilePositionOffset.x * UnitsPerTile,
+				-Instance.tilePositionOffset.y * UnitsPerTile);
+		}
+	}
+
+	public static Vector2 TopRightCorner
+	{
+		get
+		{
+			return new Vector2(
+				(BoardSize.x - Instance.tilePositionOffset.x) * UnitsPerTile,
+				(BoardSize.y - Instance.tilePositionOffset.y) * UnitsPerTile);
+		}
+	}
+
+	// Use this for initialization
+	private new void Awake()
+	{
+		base.Awake();
+		
 		UpdateBoard();
 		board = new IBoardItem[boardSize.x, boardSize.y];
 		boardLength = Mathf.Max(boardSize.x, boardSize.y);
@@ -124,16 +146,16 @@ public class BoardController : Singleton<BoardController>
 	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
 	{
 		return new Vector3(
-			(boardPosition.x - Instance.tilePositionOffset.x) * UnitsPerTile + HalfTileLength,
-			(boardPosition.y - Instance.tilePositionOffset.y) * UnitsPerTile + HalfTileLength);
+			(boardPosition.x - Instance.tilePositionOffset.x) * UnitsPerTile + HalfUnitsPerTile,
+			(boardPosition.y - Instance.tilePositionOffset.y) * UnitsPerTile + HalfUnitsPerTile);
 	}
 
 	//To be tested:
 	public static Vector2Int WorldPositionToBoardPosition(Vector2 worldPosition)
 	{
 		return new Vector2Int(
-			Mathf.FloorToInt(worldPosition.x / UnitsPerTile - HalfTileLength) + Instance.tilePositionOffset.x,
-			Mathf.FloorToInt(worldPosition.y / UnitsPerTile - HalfTileLength) + Instance.tilePositionOffset.y);
+			Mathf.FloorToInt(worldPosition.x / UnitsPerTile) + Instance.tilePositionOffset.x,
+			Mathf.FloorToInt(worldPosition.y / UnitsPerTile) + Instance.tilePositionOffset.y);
 	}
 
 	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: IBoardItem

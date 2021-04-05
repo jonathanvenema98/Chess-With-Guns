@@ -438,7 +438,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 22
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1511,6 +1511,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 589756713}
+  - component: {fileID: 589756714}
   m_Layer: 0
   m_Name: Camera Controller
   m_TagString: Untagged
@@ -1532,6 +1533,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &589756714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 589756712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b430286bf52bbc24d8f17e0c4339c16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 519420031}
+  moveDuration: 1.7
+  mouseZoomSpeed: 1
+  keyZoomSpeed: 0.5
+  minZoom: 6
+  focusedZoom: 8
+  unFocusThreshold: 4
 --- !u!1 &647292109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,6 +2160,7 @@ GameObject:
   - component: {fileID: 1604021168}
   - component: {fileID: 1604021170}
   - component: {fileID: 1604021171}
+  - component: {fileID: 1604021172}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2201,6 +2221,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cec56db9a1a442f7b1da3f040eca4864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1604021172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1604021167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a76765c2c2db34d9adb9ff4718acdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1614326167

@@ -8,8 +8,10 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
     {
         get
         {
+            #if UNITY_EDITOR
             if (Application.isEditor)
                 _instance = FindObjectOfType<T>();
+            #endif
             
             if (_instance == null)
                 CreateInstance();
@@ -17,7 +19,7 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         }
     }
 
-    private void Awake()
+    protected void Awake()
     {
         if (_instance == null)
         {

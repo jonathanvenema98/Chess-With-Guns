@@ -33,6 +33,12 @@ public class GameController : Singleton<GameController>
 		// 	.Build()
 		// 	.ForEach(m => Debug.Log(m));
 	}
+
+	[InspectorButton]
+	private void BoardPosition()
+	{
+		Debug.Log(BoardController.WorldPositionToBoardPosition(boardItem.transform.position));
+	}
 	
 	public static void NextRound()
 	{

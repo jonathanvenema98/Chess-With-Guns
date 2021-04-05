@@ -10,5 +10,11 @@ public class PlayerTurnState : State
     public override void OnStart()
     {
         GameController.SetCurrentTeam(currentTeam);
+        InterfaceController.OnTileClickedEvent += CameraController.Instance.OnTileClickedSubscriber;
+    }
+
+    public override void OnExit()
+    {
+        InterfaceController.OnTileClickedEvent -= CameraController.Instance.OnTileClickedSubscriber;
     }
 }
