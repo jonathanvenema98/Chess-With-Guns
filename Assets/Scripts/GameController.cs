@@ -4,6 +4,7 @@ public class GameController : Singleton<GameController>
 {
 	[SerializeField] private Obstacle boardItem;
 	[SerializeField] private Vector2Int target;
+	[SerializeField] private Color focusedTileColour;
 	
 	public static int Round { get; private set; }
 	
@@ -13,7 +14,12 @@ public class GameController : Singleton<GameController>
 	{
 		get { return Round == 1; }
 	}
-	
+
+	public static Color FocusedTileColour
+	{
+		get { return Instance.focusedTileColour; }
+	}
+
 	[InspectorButton]
 	private void MoveToTarget()
 	{

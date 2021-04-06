@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class BoardController : Singleton<BoardController>
@@ -9,10 +10,14 @@ public class BoardController : Singleton<BoardController>
 	[SerializeField] private Tilemap boardTilemap;
 	[SerializeField] private Tile tileA;
 	[SerializeField] private Tile tileB;
-	
+
+	[SerializeField] private Transform tileBordersParent;
+	[SerializeField] private SpriteRenderer tileBorderPrefab;
+
 	private Vector2Int tilePositionOffset;
 	private IBoardItem[,] board;
 	private int boardLength;
+	private Dictionary<Vector2Int, SpriteRenderer> tileBorders = new Dictionary<Vector2Int, SpriteRenderer>();
 
 	public static Vector2Int BoardSize
 	{
@@ -105,42 +110,42 @@ public class BoardController : Singleton<BoardController>
 			: tileB;
 	}
 
-	public static IBoardItem GetBoardItemAt(Vector2Int position)
+	public static IBoardItem GetBoardItemAt(Vector2Int boardPosition)
 	{
-		return IsWithinBoard(position)
-			? Instance.board[position.x, position.y]
+		return IsWithinBoard(boardPosition)
+			? Instance.board[boardPosition.x, boardPosition.y]
 			: null;
 	}
 
-	public static T GetBoardItemAt<T>(Vector2Int position) where T : IBoardItem
+	public static T GetBoardItemAt<T>(Vector2Int boardPosition) where T : IBoardItem
 	{
-		IBoardItem boardItem = GetBoardItemAt(position);
+		IBoardItem boardItem = GetBoardItemAt(boardPosition);
 		if (boardItem is T)
 			return (T) boardItem;
 
 		return default(T);
 	}
 
-	public static bool IsBoardItemAt(Vector2Int position)
+	public static bool IsBoardItemAt(Vector2Int boardPosition)
 	{
-		return GetBoardItemAt(position) != null;
+		return GetBoardItemAt(boardPosition) != null;
 	}
 
-	public static bool IsObstacleAt(Vector2Int position)
+	public static bool IsObstacleAt(Vector2Int boardPosition)
 	{
-		return IsBoardItemAt(position) && GetBoardItemAt(position) is Obstacle;
+		return IsBoardItemAt(boardPosition) && GetBoardItemAt(boardPosition) is Obstacle;
 	}
 
-	public static bool IsPieceAt(Vector2Int position)
+	public static bool IsPieceAt(Vector2Int boardPosition)
 	{
-		return IsBoardItemAt(position) && GetBoardItemAt(position) is IPiece;
+		return IsBoardItemAt(boardPosition) && GetBoardItemAt(boardPosition) is IPiece;
 	}
 
-	public static bool IsWithinBoard(Vector2Int position)
+	public static bool IsWithinBoard(Vector2Int boardPosition)
 	{
 		return Application.isPlaying
-		       && position.x >= 0 && position.x < BoardSize.x
-		       && position.y >= 0 && position.y < BoardSize.y;
+		       && boardPosition.x >= 0 && boardPosition.x < BoardSize.x
+		       && boardPosition.y >= 0 && boardPosition.y < BoardSize.y;
 	}
 
 	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
@@ -158,13 +163,13 @@ public class BoardController : Singleton<BoardController>
 			Mathf.FloorToInt(worldPosition.y / UnitsPerTile) + Instance.tilePositionOffset.y);
 	}
 
-	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int to) where T: IBoardItem
+	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int toBoardPosition) where T: IBoardItem
 	{
-		if (IsBoardItemAt(to) || !IsWithinBoard(to))
+		if (IsBoardItemAt(toBoardPosition) || !IsWithinBoard(toBoardPosition))
 			return false;
 		
 		RemoveBoardItemAt(boardItem.BoardPosition);
-		SetBoardItemAt(boardItem, to);
+		SetBoardItemAt(boardItem, toBoardPosition);
 		return true;
 	}
 
@@ -180,15 +185,64 @@ public class BoardController : Singleton<BoardController>
 		return piece != null && piece.Team != playerTeam;
 	}
 
-	private static void RemoveBoardItemAt(Vector2Int position)
+	private static void RemoveBoardItemAt(Vector2Int boardPosition)
 	{
-		Instance.board[position.x, position.y] = null;
+		Instance.board[boardPosition.x, boardPosition.y] = null;
 	}
 
-	private static void SetBoardItemAt<T>(T boardItem, Vector2Int position) where T: IBoardItem
+	private static void SetBoardItemAt<T>(T boardItem, Vector2Int boardPosition) where T: IBoardItem
 	{
-		Instance.board[position.x, position.y] = boardItem;
-		boardItem.BoardPosition = position;
-		boardItem.Transform.position = BoardPositionToWorldPosition(position);
+		Instance.board[boardPosition.x, boardPosition.y] = boardItem;
+		boardItem.BoardPosition = boardPosition;
+		boardItem.Transform.position = BoardPositionToWorldPosition(boardPosition);
+	}
+
+	public static void HideBorderAt(Vector2Int boardPosition)
+	{
+		SpriteRenderer tileBorder;
+		if (Instance.tileBorders.TryGetValue(boardPosition, out tileBorder))
+		{
+			tileBorder.enabled = false;
+		}
+	}
+	
+	public static void DestroyBorderAt(Vector2Int boardPosition)
+	{
+		SpriteRenderer tileBorder;
+		if (Instance.tileBorders.TryGetValue(boardPosition, out tileBorder))
+		{
+			Destroy(tileBorder.gameObject);
+			Instance.tileBorders.Remove(boardPosition);
+		}
+	}
+
+	public static void ShowBorderAt(Vector2Int boardPosition, Color colour)
+	{
+		var tileBorders = Instance.tileBorders;
+		SpriteRenderer tileBorder;
+		
+		if (!tileBorders.TryGetValue(boardPosition, out tileBorder))
+		{
+			 tileBorder = Instantiate(
+				Instance.tileBorderPrefab,
+				BoardPositionToWorldPosition(boardPosition),
+				Quaternion.identity,
+				Instance.tileBordersParent);
+
+			 tileBorders[boardPosition] = tileBorder;
+		}
+
+		tileBorder.enabled = true;
+		tileBorder.color = colour;
+	}
+
+	public static void DestroyAllBorders()
+	{
+		var tileBorders = Instance.tileBorders;
+		foreach (var pair in tileBorders)
+		{
+			Destroy(pair.Value.gameObject);
+			tileBorders.Remove(pair.Key);
+		}
 	}
 }

@@ -54,6 +54,8 @@ public class CameraController : Singleton<CameraController>
     public void UnfocusCamera()
     {
         isFocused = false;
+        BoardController.DestroyBorderAt(focusedTile);
+        
         newPosition = new Vector3(0, 0, newPosition.z);
         newZoom = maxZoom;
     }
@@ -61,7 +63,10 @@ public class CameraController : Singleton<CameraController>
     public void FocusCamera(Vector2Int boardPosition)
     {
         isFocused = true;
+        BoardController.DestroyBorderAt(focusedTile);
         focusedTile = boardPosition;
+        BoardController.ShowBorderAt(focusedTile, GameController.FocusedTileColour);
+        
         newPosition = BoardController.BoardPositionToWorldPosition(boardPosition);
         newZoom = focusedZoom;
     }
