@@ -17,47 +17,26 @@ public class BoardController : Singleton<BoardController>
 	private Vector2Int tilePositionOffset;
 	private IBoardItem[,] board;
 	private int boardLength;
-	private Dictionary<Vector2Int, SpriteRenderer> tileBorders = new Dictionary<Vector2Int, SpriteRenderer>();
+	private readonly Dictionary<Vector2Int, SpriteRenderer> tileBorders = new Dictionary<Vector2Int, SpriteRenderer>();
 
-	public static Vector2Int BoardSize
-	{
-		get { return Instance.boardSize; }
-	}
+	public static Vector2Int BoardSize => Instance.boardSize;
 
-	public static int BoardLength
-	{
-		get { return Instance.boardLength; }
-	}
+	public static int BoardLength => Instance.boardLength; 
+	
+	public static int UnitsPerTile => Instance.unitsPerTile; 
+	
 
-	public static int UnitsPerTile
-	{
-		get { return Instance.unitsPerTile; }
-	}
+	public static float HalfUnitsPerTile => UnitsPerTile / 2F;
 
-	public static float HalfUnitsPerTile
-	{
-		get { return UnitsPerTile / 2F; }
-	}
+	public static Vector2 BottomLeftCorner =>
+		new Vector2(
+			-Instance.tilePositionOffset.x * UnitsPerTile,
+			-Instance.tilePositionOffset.y * UnitsPerTile);
 
-	public static Vector2 BottomLeftCorner
-	{
-		get
-		{
-			return new Vector2(
-				-Instance.tilePositionOffset.x * UnitsPerTile,
-				-Instance.tilePositionOffset.y * UnitsPerTile);
-		}
-	}
-
-	public static Vector2 TopRightCorner
-	{
-		get
-		{
-			return new Vector2(
-				(BoardSize.x - Instance.tilePositionOffset.x) * UnitsPerTile,
-				(BoardSize.y - Instance.tilePositionOffset.y) * UnitsPerTile);
-		}
-	}
+	public static Vector2 TopRightCorner =>
+		new Vector2(
+			(BoardSize.x - Instance.tilePositionOffset.x) * UnitsPerTile,
+			(BoardSize.y - Instance.tilePositionOffset.y) * UnitsPerTile);
 
 	// Use this for initialization
 	private new void Awake()
@@ -120,10 +99,10 @@ public class BoardController : Singleton<BoardController>
 	public static T GetBoardItemAt<T>(Vector2Int boardPosition) where T : IBoardItem
 	{
 		IBoardItem boardItem = GetBoardItemAt(boardPosition);
-		if (boardItem is T)
-			return (T) boardItem;
+		if (boardItem is T t)
+			return t;
 
-		return default(T);
+		return default;
 	}
 
 	public static bool IsBoardItemAt(Vector2Int boardPosition)
@@ -199,8 +178,7 @@ public class BoardController : Singleton<BoardController>
 
 	public static void HideBorderAt(Vector2Int boardPosition)
 	{
-		SpriteRenderer tileBorder;
-		if (Instance.tileBorders.TryGetValue(boardPosition, out tileBorder))
+		if (Instance.tileBorders.TryGetValue(boardPosition, out var tileBorder))
 		{
 			tileBorder.enabled = false;
 		}
@@ -208,8 +186,7 @@ public class BoardController : Singleton<BoardController>
 	
 	public static void DestroyBorderAt(Vector2Int boardPosition)
 	{
-		SpriteRenderer tileBorder;
-		if (Instance.tileBorders.TryGetValue(boardPosition, out tileBorder))
+		if (Instance.tileBorders.TryGetValue(boardPosition, out var tileBorder))
 		{
 			Destroy(tileBorder.gameObject);
 			Instance.tileBorders.Remove(boardPosition);
@@ -219,9 +196,8 @@ public class BoardController : Singleton<BoardController>
 	public static void ShowBorderAt(Vector2Int boardPosition, Color colour)
 	{
 		var tileBorders = Instance.tileBorders;
-		SpriteRenderer tileBorder;
-		
-		if (!tileBorders.TryGetValue(boardPosition, out tileBorder))
+
+		if (!tileBorders.TryGetValue(boardPosition, out var tileBorder))
 		{
 			 tileBorder = Instantiate(
 				Instance.tileBorderPrefab,

@@ -39,7 +39,7 @@ public class CameraController : Singleton<CameraController>
         ApplyMovement();
     }
 
-    public void OnTileClickedSubscriber(Vector2Int boardPosition)
+    public void OnTileLeftClickedSubscriber(Vector2Int boardPosition)
     {
         if (isFocused && boardPosition == focusedTile)
         {
@@ -59,7 +59,7 @@ public class CameraController : Singleton<CameraController>
         newPosition = new Vector3(0, 0, newPosition.z);
         newZoom = maxZoom;
     }
-
+    
     public void FocusCamera(Vector2Int boardPosition)
     {
         isFocused = true;

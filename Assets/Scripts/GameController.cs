@@ -1,24 +1,23 @@
-﻿using UnityEngine;
+﻿using Unity.Collections;
+using UnityEngine;
 
 public class GameController : Singleton<GameController>
 {
+	
 	[SerializeField] private Obstacle boardItem;
 	[SerializeField] private Vector2Int target;
 	[SerializeField] private Color focusedTileColour;
+	[SerializeField] private GameMode gameMode;
 	
 	public static int Round { get; private set; }
 	
 	public static Team CurrentTeam { get; private set; }
 
-	public static bool FirstRound
-	{
-		get { return Round == 1; }
-	}
+	public static bool FirstRound => Round == 1;
 
-	public static Color FocusedTileColour
-	{
-		get { return Instance.focusedTileColour; }
-	}
+	public static Color FocusedTileColour => Instance.focusedTileColour;
+
+	public static GameMode GameMode => Instance.gameMode;
 
 	[InspectorButton]
 	private void MoveToTarget()
@@ -33,7 +32,7 @@ public class GameController : Singleton<GameController>
 		//For testing purposes
 		// MoveBuilder.For(boardItem)
 		// 	.WhereNot(MoveOptions.BoardItem)
-		// 	.ForwardUntilBlocked(-1)
+		// 	.ForwardUntilBlocked(2)
 		// 	.DiagonallyLeftUntilBlocked(1)
 		// 	.DiagonallyRightUntilBlocked(1)
 		// 	.Build()
@@ -61,6 +60,7 @@ public class GameController : Singleton<GameController>
 	// Use this for initialization
 	private void Start ()
 	{
+		
 	}
 	
 	// Update is called once per frame
