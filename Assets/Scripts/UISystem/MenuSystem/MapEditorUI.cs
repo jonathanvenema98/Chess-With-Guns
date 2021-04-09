@@ -7,6 +7,7 @@ public class MapEditorUI : MonoBehaviour
     
     [SerializeField] private InputField filenameInputField;
     [SerializeField] private Button saveLevelButton;
+    [SerializeField] private Button clearLevelButton;
     [SerializeField] private Text displayMessage;
 
     private bool needsToConfirm;
@@ -15,6 +16,7 @@ public class MapEditorUI : MonoBehaviour
     {
         saveMenu.SetActive(true);
         saveLevelButton.gameObject.SetActive(false);
+        clearLevelButton.gameObject.SetActive(false);
     }
 
     public void HideSaveMenu()
@@ -24,6 +26,7 @@ public class MapEditorUI : MonoBehaviour
         displayMessage.text = "";
         needsToConfirm = false;
         saveLevelButton.gameObject.SetActive(true);
+        clearLevelButton.gameObject.SetActive(true);
     }
 
     public void SaveLevel()

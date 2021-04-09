@@ -1510,6 +1510,7 @@ MonoBehaviour:
   saveMenu: {fileID: 1972678413}
   filenameInputField: {fileID: 269746082}
   saveLevelButton: {fileID: 1255595334}
+  clearLevelButton: {fileID: 568341224}
   displayMessage: {fileID: 820781771}
 --- !u!114 &1406918085
 MonoBehaviour:
