@@ -1,14 +1,10 @@
 using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public static class Utils
+public class Utils : Singleton<Utils>
 {
-    public static bool HasFlag(this Enum flags, Enum flag)
-    {
-        int flagsValue = (int) (object) flags;
-        int flagValue  = (int) (object) flag;
-        return (flagsValue & flagValue) == flagValue;
-    }
-
     #region Input
 
     public const int LeftMouseButton = 0;
@@ -18,5 +14,28 @@ public static class Utils
     public const string VerticalAxis = "Vertical";
     public const string HorizontalAxis = "Horizontal";
 
+    public static Vector3 MouseWorldPosition => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    
     #endregion
+
+    #region Coroutines
+
+    public static void After(float seconds, Action action)
+    {
+        IEnumerator Delay()
+        {
+            yield return new WaitForSecondsRealtime(seconds);
+            action.Invoke();
+        }
+
+        Instance.StartCoroutine(Delay());
+    }
+
+    private void OnApplicationQuit()
+    {
+        Instance.StopAllCoroutines();
+    }
+
+    #endregion
+
 }
