@@ -3,12 +3,12 @@ using System.Collections.Generic;
 [System.Serializable]
 public class TilemapData
 {
-    public List<TileData> ChangedTiles { get; set; }    
+    public List<TileData> Tiles { get; set; }    
     
     public TilemapData() { }
 
-    public TilemapData(List<TileData> changedTiles)
+    public TilemapData(List<TileData> tiles)
     {
-        ChangedTiles = changedTiles;
+        Tiles = tiles;
     }
 }

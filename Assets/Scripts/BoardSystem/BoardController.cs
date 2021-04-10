@@ -51,7 +51,7 @@ public class BoardController : Singleton<BoardController>
 	[InspectorButton]
 	private void UpdateBoard()
 	{
-		tilePositionOffset = new Vector2Int(boardSize.x / 2, boardSize.y / 2);
+		tilePositionOffset = boardSize / 2;
 
 		if (tileA == null || tileB == null || boardTilemap == null)
 		{

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -9,19 +7,21 @@ using UnityEngine.Tilemaps;
 using UnityTileData = UnityEngine.Tilemaps.TileData;
 
 [ExecuteAlways]
-public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>
+public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapDriver
 {
 #if UNITY_EDITOR
     
     [SerializeField] private Tilemap tilemap;
-
+    [SerializeField] private string levelName;
+    
+    
     private readonly List<TileData> changedTiles = new List<TileData>();
 
     private bool MadeChanges => changedTiles.Count != 0;
     private string Filename => $"{tilemap.name}-{GetInstanceID()}";
-
-    public static Tilemap Tilemap => Instance.tilemap;
+    public Tilemap Tilemap => tilemap;
     
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -56,11 +56,18 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>
     [InspectorButton]
     public void ClearTilemap()
     {
-        tilemap
-            .GetAllTilePositions()
-            .ForEach(position => changedTiles.Add(new TileData(position, null)));
+        changedTiles.Clear();
+        changedTiles.Add(TileData.ClearTilemap);
         tilemap.ClearAllTiles();
     }
+
+    public void SetTile(Vector3Int position, TileBase tile)
+    {
+        tilemap.SetTile(position, tile);
+        string tileName = tile == null ? null : tile.name;
+        changedTiles.Add(new TileData(position, tileName));
+    }
+    
 
     [InspectorButton]
     private void ApplyChanges()
@@ -70,10 +77,15 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>
         var tiles = SaveSystem.GetTilePalette();
 
         var tilemapData = SaveSystem.LoadData<TilemapData>(Filename);
-        foreach (var tileData in tilemapData.ChangedTiles)
+        foreach (var tileData in tilemapData.Tiles)
         {
-            tilemap.SetTile(tileData.TilePosition,
-                string.IsNullOrEmpty(tileData.TileName) ? null : tiles[tileData.TileName]);
+            if (Equals(tileData, TileData.ClearTilemap))
+                tilemap.ClearAllTiles();
+            else
+            {
+                tilemap.SetTile(tileData.TilePosition,
+                    string.IsNullOrEmpty(tileData.TileName) ? null : tiles[tileData.TileName]);
+            }
         }
 
         tilemap.CompressBounds();
@@ -101,6 +113,21 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>
         {
             SaveChanges();
         }
+    }
+
+    [InspectorButton]
+    private void LoadLevel()
+    {
+        SaveSystem.LoadLevel(this, levelName);
+    }
+
+    private void Update()
+    {
+        // if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
+        // {
+        //     Vector3Int pos = tilemap.WorldToCell(Utils.MouseWorldPosition);
+        //     Debug.Log(pos);
+        // }
     }
 
 #endif

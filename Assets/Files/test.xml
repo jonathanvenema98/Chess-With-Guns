@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LevelData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TilemapSize>
+    <x>17</x>
+    <y>15</y>
+    <z>1</z>
+  </TilemapSize>
+  <TilemapOrigin>
+    <x>-15</x>
+    <y>-14</y>
+    <z>0</z>
+  </TilemapOrigin>
   <TilemapData>
-    <ChangedTiles>
+    <Tiles>
       <TileData>
         <TilePosition>
           <X>-15</X>
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -16,7 +26,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -24,7 +34,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -32,7 +42,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -40,7 +50,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -48,7 +58,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -56,7 +66,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -64,7 +74,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -72,7 +82,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -80,7 +90,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -88,7 +98,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -96,7 +106,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -104,7 +114,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -112,7 +122,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -120,7 +130,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -128,7 +138,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -136,7 +146,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -144,7 +154,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -152,7 +162,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -160,7 +170,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -168,7 +178,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -176,7 +186,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -184,7 +194,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -192,7 +202,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -200,7 +210,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -208,7 +218,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -216,7 +226,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -224,7 +234,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -232,7 +242,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -240,7 +250,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -248,7 +258,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -256,7 +266,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -264,7 +274,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -272,7 +282,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -280,7 +290,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -288,7 +298,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -296,7 +306,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -304,7 +314,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -312,7 +322,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -320,7 +330,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -328,7 +338,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -336,7 +346,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -344,7 +354,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -352,7 +362,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -360,7 +370,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -368,7 +378,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -376,7 +386,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -384,7 +394,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -392,7 +402,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -400,7 +410,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -408,7 +418,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -416,7 +426,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -424,7 +434,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -432,7 +442,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -440,7 +450,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -448,7 +458,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -456,7 +466,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -464,7 +474,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -472,7 +482,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -480,7 +490,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -488,7 +498,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -496,7 +506,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -504,7 +514,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -512,7 +522,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -520,7 +530,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -528,7 +538,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -536,7 +546,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -544,7 +554,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -552,7 +562,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -560,7 +570,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -568,7 +578,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -576,7 +586,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -584,7 +594,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -592,7 +602,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -600,7 +610,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -608,7 +618,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -616,7 +626,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -624,7 +634,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -632,7 +642,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -640,7 +650,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -648,7 +658,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -656,7 +666,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -664,7 +674,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -672,7 +682,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -680,7 +690,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -688,7 +698,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -696,7 +706,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -704,7 +714,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -712,7 +722,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -720,7 +730,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -728,7 +738,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -736,7 +746,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -744,7 +754,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -752,7 +762,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -760,7 +770,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -768,7 +778,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -776,7 +786,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -784,7 +794,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -792,7 +802,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -800,7 +810,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -808,7 +818,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -816,7 +826,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -824,7 +834,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -832,7 +842,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -840,7 +850,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -848,7 +858,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -856,7 +866,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -864,7 +874,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -872,7 +882,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -880,7 +890,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -888,7 +898,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -896,7 +906,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -904,7 +914,7 @@
           <Y>0</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -912,7 +922,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -920,7 +930,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -928,7 +938,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -936,7 +946,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -944,7 +954,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -952,7 +962,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -960,7 +970,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -968,7 +978,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -976,7 +986,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -984,7 +994,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -992,7 +1002,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1000,7 +1010,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1008,7 +1018,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1016,7 +1026,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1024,7 +1034,7 @@
           <Y>0</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1032,7 +1042,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1040,7 +1050,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1048,7 +1058,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1056,7 +1066,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1064,7 +1074,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1072,7 +1082,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1080,7 +1090,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1088,7 +1098,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1096,7 +1106,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1104,7 +1114,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1112,7 +1122,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1120,7 +1130,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1128,7 +1138,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1136,7 +1146,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1144,7 +1154,7 @@
           <Y>0</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1152,7 +1162,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1160,7 +1170,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1168,7 +1178,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1176,7 +1186,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1184,7 +1194,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1192,7 +1202,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1200,7 +1210,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1208,7 +1218,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1216,7 +1226,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1224,7 +1234,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1232,7 +1242,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1240,7 +1250,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1248,7 +1258,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1256,7 +1266,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1264,7 +1274,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1272,7 +1282,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1280,7 +1290,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1288,7 +1298,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1296,7 +1306,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1304,7 +1314,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1312,7 +1322,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1320,7 +1330,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1328,7 +1338,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1336,7 +1346,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1344,7 +1354,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1352,7 +1362,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1360,7 +1370,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1368,7 +1378,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1376,7 +1386,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1384,7 +1394,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1392,7 +1402,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1400,7 +1410,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1408,7 +1418,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1416,7 +1426,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1424,7 +1434,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1432,7 +1442,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1440,7 +1450,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1448,7 +1458,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1456,7 +1466,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1464,7 +1474,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1472,7 +1482,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1480,7 +1490,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1488,7 +1498,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1496,7 +1506,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1504,7 +1514,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1512,7 +1522,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1520,7 +1530,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1528,7 +1538,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1536,7 +1546,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1544,7 +1554,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1552,7 +1562,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1560,7 +1570,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1568,7 +1578,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1576,7 +1586,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1584,7 +1594,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1592,7 +1602,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1600,7 +1610,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1608,7 +1618,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1616,7 +1626,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1624,7 +1634,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1632,7 +1642,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1640,7 +1650,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1648,7 +1658,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1656,7 +1666,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1664,7 +1674,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1672,7 +1682,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1680,7 +1690,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1688,7 +1698,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1696,7 +1706,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1704,7 +1714,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1712,7 +1722,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1720,7 +1730,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1728,7 +1738,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1736,7 +1746,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1744,7 +1754,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1752,7 +1762,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1760,7 +1770,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1768,7 +1778,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1776,7 +1786,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1784,7 +1794,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1792,7 +1802,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1800,7 +1810,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_bridge_tile</TileName>
+        <TileName>isometric_bridge_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1808,7 +1818,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1816,7 +1826,7 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1824,7 +1834,7 @@
           <Y>-14</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1832,7 +1842,7 @@
           <Y>-13</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1840,7 +1850,7 @@
           <Y>-12</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1848,7 +1858,7 @@
           <Y>-11</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1856,7 +1866,7 @@
           <Y>-10</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1864,7 +1874,7 @@
           <Y>-9</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1872,7 +1882,7 @@
           <Y>-8</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1880,7 +1890,7 @@
           <Y>-7</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_grass_tile</TileName>
+        <TileName>isometric_grass_full_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1888,7 +1898,7 @@
           <Y>-6</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1896,7 +1906,7 @@
           <Y>-5</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1904,7 +1914,7 @@
           <Y>-4</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1912,7 +1922,7 @@
           <Y>-3</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1920,7 +1930,7 @@
           <Y>-2</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
       <TileData>
         <TilePosition>
@@ -1928,8 +1938,8 @@
           <Y>-1</Y>
           <Z>0</Z>
         </TilePosition>
-        <TileName>isometric_water_tile</TileName>
+        <TileName>isometric_water_half_tile</TileName>
       </TileData>
-    </ChangedTiles>
+    </Tiles>
   </TilemapData>
 </LevelData>

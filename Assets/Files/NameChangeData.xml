@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListDataOfNameChangeData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Data>
+    <NameChangeData>
+      <From>TilemapCentre</From>
+      <To>TilemapSize</To>
+    </NameChangeData>
+    <NameChangeData>
+      <From>ChangedTiles</From>
+      <To>Tiles</To>
+    </NameChangeData>
+    <NameChangeData>
+      <From>isometric_grass_tile</From>
+      <To>isometric_grass_full_tile</To>
+    </NameChangeData>
+    <NameChangeData>
+      <From>isometric_bridge_tile</From>
+      <To>isometric_bridge_full_tile</To>
+    </NameChangeData>
+    <NameChangeData>
+      <From>isometric_water_tile</From>
+      <To>isometric_water_half_tile</To>
+    </NameChangeData>
+  </Data>
+</ListDataOfNameChangeData>

@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 006bfb3be30699446999eb1a19c774fc, type: 3}
-    totalSpriteSurfaceArea: 15360
+    totalSpriteSurfaceArea: 18432
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -53,14 +53,16 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 97d98c61fdde5824b95d7d6d41511315, type: 3}
   - {fileID: 21300000, guid: 59b66e423f55e1a4e9a61182ad94a31d, type: 3}
   - {fileID: 21300000, guid: 945cc0c5d3637494dbac59cf3a639f2e, type: 3}
+  - {fileID: 21300000, guid: 661f8579c1a675144bf4b1686ef437c2, type: 3}
   - {fileID: 21300000, guid: 0c39a889bb654884fbee950a206b61bb, type: 3}
   - {fileID: 21300000, guid: 191932ed01f56cc44bb0229f9a8dbda4, type: 3}
   m_PackedSpriteNamesToIndex:
   - isometric_water_full_tile
-  - isometric_water_tile
+  - isometric_water_half_tile
   - isometric_ice_full_tile
-  - isometric_bridge_tile
-  - isometric_grass_tile
+  - isometric_ice_half_tile
+  - isometric_bridge_full_tile
+  - isometric_grass_full_tile
   m_RenderDataMap: {}
   m_Tag: IsometricTiles
   m_IsVariant: 0
