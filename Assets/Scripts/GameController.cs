@@ -66,6 +66,13 @@ public class GameController : Singleton<GameController>
 	// Update is called once per frame
 	private void Update ()
 	{
-			
+		//    Example function call
+		if(Input.GetMouseButtonDown(Utils.LeftMouseButton))
+		{
+			Debug.Log(BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition));
+			FadingUIManager.Instance.CreateFadingText(
+				BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition),
+				"text message", Color.red);
+		}
 	}
 }

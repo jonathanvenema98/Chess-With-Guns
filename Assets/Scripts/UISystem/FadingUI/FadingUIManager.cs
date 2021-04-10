@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FadingUIManager : MonoBehaviour
+public class FadingUIManager : Singleton<FadingUIManager>
 {
-
-    private static FadingUIManager instance;
-
     public GameObject fadingTextPrefab;
 
     public RectTransform canvasTransform;
@@ -16,34 +11,18 @@ public class FadingUIManager : MonoBehaviour
     public Color color;
     public bool crit;
 
-    public static FadingUIManager Instance
+    public void CreateFadingText(Vector2Int boardPosition, string messageText, Color color)
     {
-        get
-        {
-            if(instance == null)
-            {
-                instance = GameObject.FindObjectOfType<FadingUIManager>();
-            }
-            return instance;
-        }
-    }
+        GameObject fto = Instantiate(fadingTextPrefab, canvasTransform);
 
-    public void CreateFadingText(Vector2Int position, string messageText, Color color)
-    {
-        GameObject fto = (GameObject)Instantiate(fadingTextPrefab, BoardController.BoardPositionToWorldPosition(position), Quaternion.identity);
-
-        fto.transform.SetParent(canvasTransform);
+        fto.transform.position = BoardController.BoardPositionToWorldPosition(boardPosition);
         fto.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         fto.GetComponent<FadingUI>().Initialise(fadingDuration);
-        fto.GetComponent<Text>().text = messageText;
-        fto.GetComponent<Text>().color = color;
+        var text = fto.GetComponent<TMP_Text>();
+        
+        text.text = messageText;
+        text.color = color;
 
     }
 }
 
-/*    Example function call
-if(Input.GetKeyDown(KeyCode.Space))
-{
-    FadingUIManager.Instance.CreateFadingText(vector2position, "text message", Color.red);
-}
-*/
