@@ -1,54 +1,43 @@
 using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class Confirmation : MonoBehaviour
+public class Confirmation
 {
-    [SerializeField] private TMP_Text message;
-    [SerializeField] private Button confirmButton;
-    [SerializeField] private Button cancelButton;
-
-    private Action onConfirm;
-    private Action onCancel;
-    
-    private void Start()
-    {
-        confirmButton.onClick.AddListener(delegate
-        {
-            onConfirm?.Invoke();
-            DeleteConfirmation();
-        });
-        
-        cancelButton.onClick.AddListener(delegate
-        {
-            onCancel?.Invoke();
-            DeleteConfirmation();
-        });
-    }
+    private ConfirmationModule confirmationModule;
 
     public static Confirmation Confirm(string message)
     {
-        var confirmation = UIController.CreateConfirmation;
-        confirmation.message.text = message;
+        Confirmation confirmation = new Confirmation
+        {
+            confirmationModule = ConfirmationModule.Of()
+                .OnConfirm(UIController.DeleteModules)
+                .OnCancel(UIController.DeleteModules)
+        };
 
+        UIController.GeneratePopup("ConfirmationPopup",
+            TextModule.Message(message),
+            LineModule.Create(),
+            confirmation.confirmationModule);
+        
         return confirmation;
     }
 
     public Confirmation OnConfirm(Action callback)
     {
-        onConfirm = callback;
+        confirmationModule.OnConfirm(modules =>
+        {
+            callback();
+            UIController.DeleteModules(modules);
+        });
         return this;
     }
 
     public Confirmation OnCancel(Action callback)
     {
-        onCancel = callback;
+        confirmationModule.OnCancel(modules =>
+        {
+            callback();
+            UIController.DeleteModules(modules);
+        });
         return this;
-    }
-
-    public void DeleteConfirmation()
-    {
-        Destroy(gameObject);
     }
 }

@@ -12,10 +12,8 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
 #if UNITY_EDITOR
     
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private string levelName;
-    
-    
-    private readonly List<TileData> changedTiles = new List<TileData>();
+
+    private List<TileData> changedTiles;
 
     private bool MadeChanges => changedTiles.Count != 0;
     private string Filename => $"{tilemap.name}-{GetInstanceID()}";
@@ -30,6 +28,7 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
 
         if (Application.isPlaying)
         {
+            changedTiles = new List<TileData>();
             Tilemap.tilemapTileChanged += TilemapTileChangedSubscriber;
         }
         else if (Application.isEditor && SaveSystem.FileExists(Filename))
@@ -113,12 +112,6 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
         {
             SaveChanges();
         }
-    }
-
-    [InspectorButton]
-    private void LoadLevel()
-    {
-        SaveSystem.LoadLevel(this, levelName);
     }
 
     private void Update()

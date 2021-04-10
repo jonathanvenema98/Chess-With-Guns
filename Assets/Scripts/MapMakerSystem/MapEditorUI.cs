@@ -1,34 +1,40 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MapEditorUI : MonoBehaviour
 {
-    [SerializeField] private GameObject saveMenu;
     [SerializeField] private GameObject ingameUI;
-    
-    [SerializeField] private InputField filenameInputField;
-    [SerializeField] private Text displayMessage;
 
+    private GameObject saveLevelMenu;
     private GameObject loadLevelMenu;
-    
-    private bool needsToConfirm;
 
     private void Start()
     {
+        saveLevelMenu =
+            UIController.GenerateFullScreenUI("Save Level Menu",
+                TextModule.Title("Save Level"),
+                LineModule.Create(),
+                InputFieldModule.Of("Filename"),
+                SpacerModule.Of(20F),
+                ConfirmationModule.Of()
+                    .OnConfirm(SaveLevel)
+                    .OnCancel(HideMenu),
+                TextModule.Message());
+        
         loadLevelMenu =
             UIController.GenerateFullScreenUI("Load Level Menu",
                 TextModule.Title("Load Level"),
                 LineModule.Create(),
-                InputFieldModule.Of("filename"),
+                InputFieldModule.Of("Filename"),
+                SpacerModule.Of(20F),
                 ConfirmationModule.Of()
                     .OnConfirm(LoadLevel)
                     .OnCancel(HideMenu),
-                TextModule.Of());
+                TextModule.Message());
     }
 
     public void DisplaySaveMenu()
     {
-        saveMenu.SetActive(true);
+        saveLevelMenu.SetActive(true);
         ingameUI.SetActive(false);
     }
 
@@ -38,36 +44,33 @@ public class MapEditorUI : MonoBehaviour
             .OnConfirm(PlaymodeTilemapEditor.Instance.ClearTilemap);
     }
 
-    public void HideSaveMenu()
+    private void SaveLevel(GameObject modules)
     {
-        saveMenu.SetActive(false);
-        filenameInputField.text = "";
-        displayMessage.text = "";
-        needsToConfirm = false;
-        ingameUI.SetActive(true);
-    }
-
-    public void SaveLevel()
-    {
-        string filename = filenameInputField.text;
-
+        TextModule textModule = modules.GetModule<TextModule>(1);
+        string filename = modules.GetComponentInChildren<InputFieldModule>().InputField.text;
+        
+        void Save()
+        {
+            HideMenu(modules);
+            SaveSystem.SaveLevel(PlaymodeTilemapEditor.Instance, filename);
+            UIController.GeneratePopup("The level has been saved", 2);
+        }
+        
         if (string.IsNullOrEmpty(filename))
         {
-            displayMessage.text = "You must enter a filename";
+            textModule.Text.text = "You must enter a filename";
             return;
         }
 
-        if (!needsToConfirm && SaveSystem.FileExists(filename))
+        if (SaveSystem.FileExists(filename))
         {
-            displayMessage.text = "That file already exists. Press confirm again to override it";
-            needsToConfirm = true;
+            HideMenu(modules);
+            Confirmation.Confirm($"The level '{filename}' already exists.\nContinuing will overwrite the existing data")
+                .OnConfirm(Save);
             return;
         }
         
-        SaveSystem.SaveLevel(PlaymodeTilemapEditor.Instance, filename);
-        displayMessage.text = "Level has been saved";
-        
-        Utils.After(2, HideSaveMenu);
+        Save();
     }
 
     public void DisplayLoadMenu()

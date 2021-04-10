@@ -695,7 +695,6 @@ GameObject:
   - component: {fileID: 8316142024363013426}
   - component: {fileID: 8316142024363013429}
   - component: {fileID: 8316142024363013428}
-  - component: {fileID: 7177910588911502033}
   m_Layer: 0
   m_Name: Confirmation
   m_TagString: Untagged
@@ -803,21 +802,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
---- !u!114 &7177910588911502033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8316142024363013430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebd472c9f8285347a1bbf5955823ad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: {fileID: 8316142023840724994}
-  confirmButton: {fileID: 8316142024210010632}
-  cancelButton: {fileID: 8316142024273733532}
 --- !u!1 &8316142024483166065
 GameObject:
   m_ObjectHideFlags: 0

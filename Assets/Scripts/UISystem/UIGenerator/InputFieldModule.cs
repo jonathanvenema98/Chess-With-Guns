@@ -16,7 +16,7 @@ public class InputFieldModule : Module, IResetable
 
     public static InputFieldModule Of(string label)
     {
-        return Of(label, $"Enter {label.ToLower()}...");
+        return Of($"{label}:", $"Enter {label.ToLower()}...");
     }
     
     public static InputFieldModule Of(string label, string placeholder)

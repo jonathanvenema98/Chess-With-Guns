@@ -3,13 +3,8 @@
 [RequireComponent(typeof(SpriteRenderer))]
 public class Obstacle : MonoBehaviour, IBoardItem
 {
-    public Transform Transform
-    {
-        get
-        {
-            return transform;
-        }
-    }
+    public Transform Transform => transform;
 
     public Vector2Int BoardPosition { get; set; }
+    
 }

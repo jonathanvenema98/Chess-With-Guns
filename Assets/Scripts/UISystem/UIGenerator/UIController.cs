@@ -6,24 +6,25 @@ public class UIController : Singleton<UIController>
     [SerializeField] private GameObject popupUIPrefab;
     [SerializeField] private Transform uiParent;
 
-    [SerializeField] private Confirmation confirmationPrefab;
     [SerializeField] private LineModule lineModulePrefab;
     [SerializeField] private InputFieldModule inputFieldModulePrefab;
     [SerializeField] private ConfirmationModule confirmationModulePrefab;
     [SerializeField] private TextModule textModulePrefab;
     [SerializeField] private ButtonModule buttonModulePrefab;
-
+    [SerializeField] private SpacerModule spacerModulePrefab;
+    
     public static Transform UIParent => Instance.uiParent;
     public static GameObject CreateFullScreenUI => Instantiate(Instance.fullScreenUIPrefab, UIParent);
     public static GameObject CreatePopupUI => Instantiate(Instance.popupUIPrefab, UIParent);
 
-    public static Confirmation CreateConfirmation => Instantiate(Instance.confirmationPrefab, UIParent);
     public static InputFieldModule CreateInputFieldModule => Instantiate(Instance.inputFieldModulePrefab);
     public static ConfirmationModule CreateConfirmationModule => Instantiate(Instance.confirmationModulePrefab);
     public static TextModule CreateTextModule => Instantiate(Instance.textModulePrefab);
     public static LineModule CreateLineModule => Instantiate(Instance.lineModulePrefab);
     public static ButtonModule CreateButtonModule => Instantiate(Instance.buttonModulePrefab);
-
+    public static SpacerModule CreateSpacerModule => Instantiate(Instance.spacerModulePrefab);
+    
+    
     public static GameObject GenerateFullScreenUI(string name, params Module[] modules)
     {
         var container = CreateFullScreenUI;
@@ -52,7 +53,7 @@ public class UIController : Singleton<UIController>
         container.name = "Popup";
 
         GenerateUI(container,
-            TextModule.Of(message),
+            TextModule.Message(message),
             LineModule.Create(),
             ButtonModule.Of("Close", Destroy));
 
@@ -65,6 +66,14 @@ public class UIController : Singleton<UIController>
 
         return container;
     }
+    
+    public static GameObject GeneratePopup(string name, params Module[] modules)
+    {
+        var container = CreatePopupUI;
+        container.name = name;
+
+        return GenerateUI(container, modules);
+    }
 
     public static void ResetModules(GameObject container)
     {
@@ -76,6 +85,11 @@ public class UIController : Singleton<UIController>
                 resetable.Reset();
             }
         }
+    }
+
+    public static void DeleteModules(GameObject modules)
+    {
+        Destroy(modules);
     }
 
 }

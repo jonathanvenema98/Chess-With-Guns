@@ -25,7 +25,6 @@ public class BoardController : Singleton<BoardController>
 	
 	public static int UnitsPerTile => Instance.unitsPerTile; 
 	
-
 	public static float HalfUnitsPerTile => UnitsPerTile / 2F;
 
 	public static Vector2 BottomLeftCorner =>
@@ -164,12 +163,12 @@ public class BoardController : Singleton<BoardController>
 		return piece != null && piece.Team != playerTeam;
 	}
 
-	private static void RemoveBoardItemAt(Vector2Int boardPosition)
+	public static void RemoveBoardItemAt(Vector2Int boardPosition)
 	{
 		Instance.board[boardPosition.x, boardPosition.y] = null;
 	}
 
-	private static void SetBoardItemAt<T>(T boardItem, Vector2Int boardPosition) where T: IBoardItem
+	public static void SetBoardItemAt<T>(T boardItem, Vector2Int boardPosition) where T: IBoardItem
 	{
 		Instance.board[boardPosition.x, boardPosition.y] = boardItem;
 		boardItem.BoardPosition = boardPosition;
