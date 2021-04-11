@@ -10,10 +10,10 @@ public class MapEditorUI : MonoBehaviour
 
     private void Start()
     {
-        buttonMenu = UIController.GenerateUI("Button Menu",
-            UIController.Size.Partial, UIController.Anchor.TopLeft, 200F,
-            TextModule.Title("Controls"),
-            LineModule.Create());
+        // buttonMenu = UIController.GenerateUI("Button Menu",
+        //     UIController.Size.Partial, UIController.Anchor.TopLeft, 200F,
+        //     TextModule.Title("Controls"),
+        //     LineModule.Create());
         
         saveLevelMenu =
             UIController.GenerateFullScreenUI("Save Level Menu",

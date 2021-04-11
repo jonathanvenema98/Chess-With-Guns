@@ -74,8 +74,10 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     protected void HandleMovement()
     {
         //Panning
-        if (usePanning)
+        if (usePanning && Input.mousePosition.x >= 0 && Input.mousePosition.x < Screen.width
+            && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height)
         {
+            
             if (Input.mousePosition.y > Screen.height - panBorder.y)
             {
                 newPosition += transform.up * panMoveSpeed;
