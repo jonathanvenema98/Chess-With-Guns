@@ -8,22 +8,32 @@ public class InterfaceController : MonoBehaviour
 	public static event TileClickedEvent OnTileRightClickedEvent;
 	
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
 	{
 		if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
 		{
-			Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(clickPosition);
+			IfWithinBoardInvokeEvent(OnTileLeftClickedEvent);
+		}
 
-			if (BoardController.IsWithinBoard(boardPosition))
-			{
-				OnTileLeftClickedEvent?.Invoke(boardPosition);
-			}
+		if (Input.GetMouseButtonDown(Utils.RightMouseButton))
+		{
+			IfWithinBoardInvokeEvent(OnTileRightClickedEvent);
+		}
+	}
+
+	private static void IfWithinBoardInvokeEvent(TileClickedEvent tileClickedEvent)
+	{
+		Vector3 clickPosition = Utils.MouseWorldPosition;
+		Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(clickPosition);
+
+		if (BoardController.IsWithinBoard(boardPosition))
+		{
+			tileClickedEvent?.Invoke(boardPosition);
 		}
 	}
 }

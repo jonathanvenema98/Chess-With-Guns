@@ -9,10 +9,11 @@ using UnityTileData = UnityEngine.Tilemaps.TileData;
 [ExecuteAlways]
 public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapDriver
 {
-#if UNITY_EDITOR
-    
     [SerializeField] private Tilemap tilemap;
-
+    [SerializeField] private Transform obj;
+    [SerializeField] private Vector2Int target;
+    
+    
     private List<TileData> changedTiles;
 
     private bool MadeChanges => changedTiles.Count != 0;
@@ -29,14 +30,16 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
         if (Application.isPlaying)
         {
             changedTiles = new List<TileData>();
-            Tilemap.tilemapTileChanged += TilemapTileChangedSubscriber;
+            #if UNITY_EDITOR    
+                Tilemap.tilemapTileChanged += TilemapTileChangedSubscriber;
+            #endif
         }
         else if (Application.isEditor && SaveSystem.FileExists(Filename))
         {
             ApplyChanges();
         }
     }
-
+#if UNITY_EDITOR   
     private void TilemapTileChangedSubscriber(Tilemap changedTilemap, Tilemap.SyncTile[] syncTiles)
     {
         if (changedTilemap != tilemap) return;
@@ -51,7 +54,8 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
             }
         }
     }
-    
+#endif    
+
     [InspectorButton]
     public void ClearTilemap()
     {
@@ -67,8 +71,6 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
         changedTiles.Add(new TileData(position, tileName));
     }
     
-
-    [InspectorButton]
     private void ApplyChanges()
     {
         if (tilemap == null)
@@ -113,15 +115,4 @@ public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapD
             SaveChanges();
         }
     }
-
-    private void Update()
-    {
-        // if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
-        // {
-        //     Vector3Int pos = tilemap.WorldToCell(Utils.MouseWorldPosition);
-        //     Debug.Log(pos);
-        // }
-    }
-
-#endif
 }

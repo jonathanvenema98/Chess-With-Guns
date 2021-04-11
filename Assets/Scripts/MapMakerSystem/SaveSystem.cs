@@ -9,14 +9,7 @@ using UnityEngine.Tilemaps;
 public class SaveSystem : Singleton<SaveSystem>
 {
     [SerializeField] private Grid gridPalette;
-    [SerializeField] private string filename;
-    
-    [InspectorButton]
-    private void UpdateDocument()
-    {
-        UpdateXMLNodes(filename);
-    }
-    
+
     #region FileIO
     
     public static string Directory => "Assets\\Files\\";
@@ -114,16 +107,17 @@ public class SaveSystem : Singleton<SaveSystem>
         SaveData(levelName, levelData);
     }
 
-    public static void LoadLevel(ITilemapDriver tilemapDriver, string levelName)
+    public static LevelData LoadLevel(ITilemapDriver tilemapDriver, string levelName)
     {
         if (!FileExists(levelName))
         {
             Debug.LogWarning($"The level {levelName} doesn't exist.");
-            return;
+            return new LevelData();
         }
 
         var levelData = LoadData<LevelData>(levelName);
         var tiles = GetTilePalette();
+        
         //Centres the loaded board
         Vector3Int tilePositionOffset = levelData.TilemapSize / 2 + levelData.TilemapOrigin;
 
@@ -141,6 +135,8 @@ public class SaveSystem : Singleton<SaveSystem>
                 TileNotFound(tileData.TileName);
             }
         }
+
+        return levelData;
     }
 
     private static void TileNotFound(string tilename)

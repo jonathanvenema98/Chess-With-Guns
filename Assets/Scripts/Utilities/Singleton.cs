@@ -2,7 +2,7 @@
 
 public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
 {
-    private static T _instance;
+    private static T instance;
     
     public static T Instance
     {
@@ -11,20 +11,20 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         {
             #if UNITY_EDITOR
             if (Application.isEditor)
-                _instance = FindObjectOfType<T>();
+                instance = FindObjectOfType<T>();
             #endif
             
-            if (_instance == null)
+            if (instance == null)
                 CreateInstance();
-            return _instance;
+            return instance;
         }
     }
 
     protected void Awake()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            _instance = (T)this;
+            instance = (T)this;
         }
         else
         {
@@ -38,6 +38,6 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         {
             name = typeof(T).Name
         };
-        _instance = gameObject.AddComponent<T>();
+        instance = gameObject.AddComponent<T>();
     }
 }

@@ -67,9 +67,9 @@ public class GameController : Singleton<GameController>
 	private void Update ()
 	{
 		//    Example function call
-		if(Input.GetMouseButtonDown(Utils.LeftMouseButton))
+		if(Input.GetMouseButtonDown(Utils.RightMouseButton))
 		{
-			Debug.Log(BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition));
+			//Debug.Log(BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition));
 			FadingUIManager.Instance.CreateFadingText(
 				BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition),
 				"text message", Color.red);

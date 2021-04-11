@@ -4,89 +4,90 @@ using UnityEngine.Tilemaps;
 
 public class BoardController : Singleton<BoardController>
 {
-	[SerializeField] private Vector2Int boardSize;
-
 	[SerializeField] private int unitsPerTile = 4;
 	[SerializeField] private Tilemap boardTilemap;
-	[SerializeField] private Tile tileA;
-	[SerializeField] private Tile tileB;
 
+	[SerializeField] private string levelName;
+	
 	[SerializeField] private Transform tileBordersParent;
 	[SerializeField] private SpriteRenderer tileBorderPrefab;
 
-	private Vector2Int tilePositionOffset;
 	private IBoardItem[,] board;
-	private int boardLength;
 	private readonly Dictionary<Vector2Int, SpriteRenderer> tileBorders = new Dictionary<Vector2Int, SpriteRenderer>();
 
-	public static Vector2Int BoardSize => Instance.boardSize;
-
-	public static int BoardLength => Instance.boardLength; 
-	
-	public static int UnitsPerTile => Instance.unitsPerTile; 
-	
-	public static float HalfUnitsPerTile => UnitsPerTile / 2F;
-
-	public static Vector2 BottomLeftCorner =>
-		new Vector2(
-			-Instance.tilePositionOffset.x * UnitsPerTile,
-			-Instance.tilePositionOffset.y * UnitsPerTile);
-
-	public static Vector2 TopRightCorner =>
-		new Vector2(
-			(BoardSize.x - Instance.tilePositionOffset.x) * UnitsPerTile,
-			(BoardSize.y - Instance.tilePositionOffset.y) * UnitsPerTile);
+	public static Vector2Int BoardSize { get; private set; }
+	public static int BoardLength { get; private set; }
+	public static int UnitsPerTile { get; private set; }
+	public static float HalfUnitsPerTile { get; private set; }
+	public static Vector3 WorldOffset { get; private set; }
+	public static Tilemap BoardTilemap { get; private set; }
 
 	// Use this for initialization
 	private new void Awake()
 	{
 		base.Awake();
 		
-		UpdateBoard();
+		Initialise();
+	}
+
+	private void Initialise()
+	{
+		var levelData = SaveSystem.LoadLevel(TilemapDriver.Of(boardTilemap), levelName);
+		var boardSize = V3ToV2(levelData.TilemapSize);
+		
 		board = new IBoardItem[boardSize.x, boardSize.y];
-		boardLength = Mathf.Max(boardSize.x, boardSize.y);
+		int boardLength = Mathf.Max(boardSize.x, boardSize.y);
+		
+		BoardSize = boardSize;
+		BoardLength = boardLength;
+		UnitsPerTile = Instance.unitsPerTile;
+		HalfUnitsPerTile = UnitsPerTile / 2F;
+		WorldOffset = Vector3.up * HalfUnitsPerTile / 4F;
+		BoardTilemap = boardTilemap;
+
+		boardTilemap.layoutGrid.cellSize = new Vector3(UnitsPerTile, HalfUnitsPerTile, UnitsPerTile);
 	}
 
-	[InspectorButton]
-	private void UpdateBoard()
-	{
-		tilePositionOffset = boardSize / 2;
+	// [InspectorButton]
+	// private void GenerateBoard()
+	// {
+	// 	tilePositionOffset = boardSize / 2;
+	//
+	// 	if (tileA == null || tileB == null || boardTilemap == null)
+	// 	{
+	// 		Debug.LogWarning(
+	// 			"Make sure all the necessary assets are set in the inspector before trying to update the board");
+	// 		return;
+	// 	}
+	//
+	// 	//The board is already the correct size
+	// 	if (boardTilemap.size.x / UnitsPerTile == boardSize.x && boardTilemap.size.y / UnitsPerTile == boardSize.y)
+	// 		return;
+	//
+	// 	//Clear the previous board
+	// 	boardTilemap.ClearAllTiles();
+	// 	boardTilemap.layoutGrid.cellSize = new Vector3(1, 1) * unitsPerTile;
+	//
+	// 	for (int x = 0; x < boardSize.x; x++)
+	// 	{
+	// 		for (int y = 0; y < boardSize.y; y++)
+	// 		{
+	// 			Vector3Int tilePosition = new Vector3Int(x - tilePositionOffset.x, y - tilePositionOffset.y, 0);
+	// 			Tile tile = DetermineTile(x, y);
+	//
+	// 			boardTilemap.SetTile(tilePosition, tile);
+	// 		}
+	// 	}
+	//
+	// 	boardTilemap.ResizeBounds();
+	// }
 
-		if (tileA == null || tileB == null || boardTilemap == null)
-		{
-			Debug.LogWarning(
-				"Make sure all the necessary assets are set in the inspector before trying to update the board");
-			return;
-		}
-
-		//The board is already the correct size
-		if (boardTilemap.size.x / UnitsPerTile == boardSize.x && boardTilemap.size.y / UnitsPerTile == boardSize.y)
-			return;
-
-		//Clear the previous board
-		boardTilemap.ClearAllTiles();
-		boardTilemap.layoutGrid.cellSize = new Vector3(1, 1) * unitsPerTile;
-
-		for (int x = 0; x < boardSize.x; x++)
-		{
-			for (int y = 0; y < boardSize.y; y++)
-			{
-				Vector3Int tilePosition = new Vector3Int(x - tilePositionOffset.x, y - tilePositionOffset.y, 0);
-				Tile tile = DetermineTile(x, y);
-
-				boardTilemap.SetTile(tilePosition, tile);
-			}
-		}
-
-		boardTilemap.ResizeBounds();
-	}
-
-	private Tile DetermineTile(int x, int y)
-	{
-		return y % 2 == x % 2
-			? tileA
-			: tileB;
-	}
+	// private Tile DetermineTile(int x, int y)
+	// {
+	// 	return y % 2 == x % 2
+	// 		? tileA
+	// 		: tileB;
+	// }
 
 	public static IBoardItem GetBoardItemAt(Vector2Int boardPosition)
 	{
@@ -128,17 +129,45 @@ public class BoardController : Singleton<BoardController>
 
 	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
 	{
-		return new Vector3(
-			(boardPosition.x - Instance.tilePositionOffset.x) * UnitsPerTile + HalfUnitsPerTile,
-			(boardPosition.y - Instance.tilePositionOffset.y) * UnitsPerTile + HalfUnitsPerTile);
+		return BoardTilemap.CellToWorld(BoardPositionToCellPosition(boardPosition))
+		       + WorldOffset + GetWorldHeightOffsetAt(boardPosition);
+	}
+	
+	public static Vector2Int WorldPositionToBoardPosition(Vector3 worldPosition)
+	{
+		return CellPositionToBoardPosition(BoardTilemap.WorldToCell(worldPosition));
 	}
 
-	//To be tested:
-	public static Vector2Int WorldPositionToBoardPosition(Vector2 worldPosition)
+	public static Vector2Int V3ToV2(Vector3Int v)
 	{
-		return new Vector2Int(
-			Mathf.FloorToInt(worldPosition.x / UnitsPerTile) + Instance.tilePositionOffset.x,
-			Mathf.FloorToInt(worldPosition.y / UnitsPerTile) + Instance.tilePositionOffset.y);
+		return new Vector2Int(v.x, v.y);
+	}
+	
+	public static Vector3Int V2ToV3(Vector2Int v)
+	{
+		return new Vector3Int(v.x, v.y, 0);
+	}
+
+	/// <summary>
+	/// Converts a position on the board (Which has 0,0 in the bottom left hand corner) to its position on the tilemap
+	/// (Which has 0,0 in the centre)
+	/// </summary>
+	/// <param name="boardPosition">The position on the board</param>
+	/// <returns>The position on the tilemap</returns>
+	public static Vector3Int BoardPositionToCellPosition(Vector2Int boardPosition)
+	{
+		return V2ToV3(boardPosition) + BoardTilemap.origin;
+	}
+
+	/// <summary>
+	/// Converts a position on the tilemap (Which has 0,0 in the centre) to its position on the board (Which has 0,0 in
+	/// the bottom left hand corner)
+	/// </summary>
+	/// <param name="cellPosition">The position on the tilemap</param>
+	/// <returns>The position on the board</returns>
+	public static Vector2Int CellPositionToBoardPosition(Vector3Int cellPosition)
+	{
+		return V3ToV2(cellPosition - BoardTilemap.origin);
 	}
 
 	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int toBoardPosition) where T: IBoardItem
@@ -173,6 +202,27 @@ public class BoardController : Singleton<BoardController>
 		Instance.board[boardPosition.x, boardPosition.y] = boardItem;
 		boardItem.BoardPosition = boardPosition;
 		boardItem.Transform.position = BoardPositionToWorldPosition(boardPosition);
+	}
+
+	/// <summary>
+	/// Returns the world height offset of the tile at the board position (E.g: half tiles aren't as tall as full tiles
+	/// so have a slight negative height offset) 
+	/// </summary>
+	/// <param name="boardPosition">The board position of the tile</param>
+	/// <returns>The world height offset of the tile</returns>
+	public static Vector3 GetWorldHeightOffsetAt(Vector2Int boardPosition)
+	{
+		if (IsWithinBoard(boardPosition))
+		{
+			var cellPosition = BoardPositionToCellPosition(boardPosition);
+			var tile = BoardTilemap.GetTile(cellPosition);
+			if (tile is HeightTile heightTile)
+			{
+				return Vector3.up * ((int) heightTile.Height - Utils.PixelsPerUnit) * Utils.Pixel;
+			}
+		}
+
+		return Vector3.zero;
 	}
 
 	public static void HideBorderAt(Vector2Int boardPosition)

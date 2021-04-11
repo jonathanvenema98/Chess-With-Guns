@@ -5,6 +5,7 @@ public class CameraController : Singleton<CameraController>
 
     [SerializeField] private new Camera camera;
 
+    [SerializeField] private float initialZoomIn;
     [SerializeField] private float moveDuration;
     [SerializeField] private float mouseZoomSpeed;
     [SerializeField] private float keyZoomSpeed;
@@ -22,9 +23,11 @@ public class CameraController : Singleton<CameraController>
     // Start is called before the first frame update
     private void Start()
     {
-        maxZoom = BoardController.BoardLength * 2 + 4;
+        maxZoom = BoardController.BoardLength + 4;
         newPosition = transform.position;
-        newZoom = camera.orthographicSize;
+        newZoom = maxZoom;
+
+        camera.orthographicSize = maxZoom + initialZoomIn;
     }
 
     private void Update()

@@ -1,10 +1,19 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Utils : Singleton<Utils>
 {
+    public const int PixelsPerUnit = 16;
+    public const float Pixel = 1F / PixelsPerUnit;
+    
+    private static Camera mainCamera;
+    
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
+    
     #region Input
 
     public const int LeftMouseButton = 0;
@@ -14,7 +23,7 @@ public class Utils : Singleton<Utils>
     public const string VerticalAxis = "Vertical";
     public const string HorizontalAxis = "Horizontal";
 
-    public static Vector3 MouseWorldPosition => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    public static Vector3 MouseWorldPosition => mainCamera.ScreenToWorldPoint(Input.mousePosition);
     
     #endregion
 

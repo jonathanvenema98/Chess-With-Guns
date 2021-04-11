@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e35f340c761460da45e1564370dcc6f, type: 3}
-  m_Name: isometric_water_half_tile
+  m_Name: isometric_test_full_tile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 59b66e423f55e1a4e9a61182ad94a31d, type: 3}
-  height: 10
+  sprite: {fileID: 21300000, guid: 505c91d8f46070c4aa6324241c0496bc, type: 3}
+  height: 16
