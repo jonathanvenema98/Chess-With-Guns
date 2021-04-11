@@ -6,6 +6,7 @@ public class Utils : Singleton<Utils>
 {
     public const int PixelsPerUnit = 16;
     public const float Pixel = 1F / PixelsPerUnit;
+    public const double FloatingPointTolerance = 1e-5D;
     
     private static Camera mainCamera;
     
@@ -13,6 +14,20 @@ public class Utils : Singleton<Utils>
     {
         mainCamera = Camera.main;
     }
+
+    #region Math
+
+    public static bool NotEqual(float a, float b)
+    {
+        return Math.Abs(a - b) > FloatingPointTolerance;
+    }
+
+    public static bool Equal(float a, float b)
+    {
+        return Math.Abs(a - b) < FloatingPointTolerance;
+    }
+
+    #endregion
     
     #region Input
 

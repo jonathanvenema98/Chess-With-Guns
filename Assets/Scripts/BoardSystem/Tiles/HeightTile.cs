@@ -10,11 +10,12 @@ public class HeightTile : TileBase
         Full = 16,
         Half = 10
     }
+    
     [SerializeField] private Sprite sprite;
     [SerializeField] private TileHeight height;
     
     public TileHeight Height => height;
-
+    
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref UnityEngine.Tilemaps.TileData tileData)
     {
         tileData.sprite = sprite;

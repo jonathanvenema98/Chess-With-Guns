@@ -1,45 +1,26 @@
 ﻿using UnityEngine;
 
-public class CameraController : Singleton<CameraController>
+public class CameraController : AbstractCameraController<CameraController>
 {
-
-    [SerializeField] private new Camera camera;
-
-    [SerializeField] private float initialZoomIn;
-    [SerializeField] private float moveDuration;
-    [SerializeField] private float mouseZoomSpeed;
-    [SerializeField] private float keyZoomSpeed;
-    [SerializeField] private float minZoom;
+    [Header("Focus Zooming")]
     [SerializeField] private float focusedZoom;
     [SerializeField] private float unFocusThreshold;
-    
-    private float maxZoom;
-    private Vector3 newPosition;
-    private float newZoom;
 
     private bool isFocused;
     private Vector2Int focusedTile;
-    
-    // Start is called before the first frame update
-    private void Start()
+
+    protected override void Initialise()
     {
         maxZoom = BoardController.BoardLength + 4;
-        newPosition = transform.position;
-        newZoom = maxZoom;
-
-        camera.orthographicSize = maxZoom + initialZoomIn;
     }
 
-    private void Update()
+    protected override void UpdateFunctionality()
     {
-        HandleMouseMovement();
-        HandleKeyboardMovement();
-        RestrictMovements();
+        HandleZooming();
+        HandleMovement();
         
         if (isFocused && newZoom - focusedZoom > unFocusThreshold)
             UnfocusCamera();
-        
-        ApplyMovement();
     }
 
     public void OnTileLeftClickedSubscriber(Vector2Int boardPosition)
@@ -72,40 +53,5 @@ public class CameraController : Singleton<CameraController>
         
         newPosition = BoardController.BoardPositionToWorldPosition(boardPosition);
         newZoom = focusedZoom;
-    }
-
-    private void HandleMouseMovement()
-    {
-        //Zooming
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            newZoom += -Input.mouseScrollDelta.y * mouseZoomSpeed;
-        }
-    }
-
-    private void HandleKeyboardMovement()
-    {
-        //Zoom
-        if (Input.GetKey(KeyCode.Z))
-        {
-            newZoom -= keyZoomSpeed;
-        }
-        if (Input.GetKey(KeyCode.C))
-        {
-            newZoom += keyZoomSpeed;
-        }
-    }
-
-    private void RestrictMovements()
-    {
-        //Restrict zoom
-        if (newZoom < minZoom) newZoom = minZoom;
-        else if (newZoom > maxZoom) newZoom = maxZoom;
-    }
-
-    private void ApplyMovement()
-    {
-        transform.position = Vector3.Lerp(transform.position, newPosition, moveDuration * Time.deltaTime);
-        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, newZoom, moveDuration * Time.deltaTime);
     }
 }
