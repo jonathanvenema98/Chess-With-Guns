@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : Singleton<UIController>
@@ -23,7 +25,36 @@ public class UIController : Singleton<UIController>
     public static LineModule CreateLineModule => Instantiate(Instance.lineModulePrefab);
     public static ButtonModule CreateButtonModule => Instantiate(Instance.buttonModulePrefab);
     public static SpacerModule CreateSpacerModule => Instantiate(Instance.spacerModulePrefab);
+
+
+    private static readonly Dictionary<Anchor, Action<RectTransform>> GetAnchorSetter =
+        new Dictionary<Anchor, Action<RectTransform>>
+        {
+            {Anchor.TopLeft, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0, 1);
+                rectTransform.anchorMax = new Vector2(0, 1);
+                rectTransform.pivot = new Vector2(0, 1);
+            }},
+            {Anchor.TopRight, rectTransform => { rectTransform.anchorMin = new Vector2(1, 1); rectTransform.anchorMax = new Vector2(1, 1); }},
+            {Anchor.Fill, rectTransform => { rectTransform.anchorMin = new Vector2(0, 0); rectTransform.anchorMax = new Vector2(1, 1); }},
+            {Anchor.Centre, rectTransform => { rectTransform.anchorMin = new Vector2(0.5F, 0.5F); rectTransform.anchorMax = new Vector2(0.5F, 0.5F); }},
+            {Anchor.BottomLeft, rectTransform => { rectTransform.anchorMin = new Vector2(0, 0); rectTransform.anchorMax = new Vector2(0, 0); }},
+            {Anchor.BottomRight, rectTransform => { rectTransform.anchorMin = new Vector2(1, 0); rectTransform.anchorMax = new Vector2(1, 0); }},
+        };
     
+    
+
+    public static GameObject GenerateUI(string name, Size size, Anchor anchor, float width, params Module[] modules)
+    {
+        var container = size == Size.Fullscreen ? CreateFullScreenUI : CreatePopupUI;
+        container.name = name;
+        var rect = container.GetComponent<RectTransform>();
+        GetAnchorSetter[anchor].Invoke(rect);
+        rect.sizeDelta = new Vector2(width, rect.sizeDelta.y);
+        
+        return GenerateUI(container, modules);
+    }
     
     public static GameObject GenerateFullScreenUI(string name, params Module[] modules)
     {
@@ -92,4 +123,13 @@ public class UIController : Singleton<UIController>
         Destroy(modules);
     }
 
+    public enum Size
+    {
+        Fullscreen, Partial
+    }
+
+    public enum Anchor
+    {
+        TopLeft, TopRight, Centre, Fill, BottomLeft, BottomRight
+    }
 }

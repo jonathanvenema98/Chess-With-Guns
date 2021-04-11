@@ -4,11 +4,17 @@ public class MapEditorUI : MonoBehaviour
 {
     [SerializeField] private GameObject ingameUI;
 
+    private GameObject buttonMenu;
     private GameObject saveLevelMenu;
     private GameObject loadLevelMenu;
 
     private void Start()
     {
+        buttonMenu = UIController.GenerateUI("Button Menu",
+            UIController.Size.Partial, UIController.Anchor.TopLeft, 200F,
+            TextModule.Title("Controls"),
+            LineModule.Create());
+        
         saveLevelMenu =
             UIController.GenerateFullScreenUI("Save Level Menu",
                 TextModule.Title("Save Level"),

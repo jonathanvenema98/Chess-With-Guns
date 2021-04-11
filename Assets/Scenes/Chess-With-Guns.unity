@@ -639,11 +639,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 519420031}
-  initialZoomIn: 10
   moveDuration: 1.7
+  initialZoomIn: 10
   mouseZoomSpeed: 1
   keyZoomSpeed: 0.5
   minZoom: 6
+  normalKeyMoveSpeed: 0
+  fastKeyMoveSpeed: 0
+  usePanning: 0
+  panMoveSpeed: 0
+  panBorder: {x: 0, y: 0}
   focusedZoom: 8
   unFocusThreshold: 4
 --- !u!1 &647292109
@@ -1416,7 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374f2d85274f90b44bf68258dff09703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitsPerTile: 4
+  unitsPerTile: 6
   boardTilemap: {fileID: 1414245836}
   levelName: Symmetrical Level
   tileBordersParent: {fileID: 544473443}
@@ -1547,7 +1552,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741344981}
   m_Enabled: 1
-  m_CellSize: {x: 4, y: 2, z: 4}
+  m_CellSize: {x: 6, y: 3, z: 6}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
