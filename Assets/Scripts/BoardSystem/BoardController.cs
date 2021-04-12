@@ -202,6 +202,10 @@ public class BoardController : Singleton<BoardController>
 		Instance.board[boardPosition.x, boardPosition.y] = boardItem;
 		boardItem.BoardPosition = boardPosition;
 		boardItem.Transform.position = BoardPositionToWorldPosition(boardPosition);
+		if (boardItem is Piece piece)
+		{
+			piece.OnPieceMove();
+		}
 	}
 
 	/// <summary>
@@ -218,7 +222,7 @@ public class BoardController : Singleton<BoardController>
 			var tile = BoardTilemap.GetTile(cellPosition);
 			if (tile is HeightTile heightTile)
 			{
-				return Vector3.up * ((int) heightTile.Height - Utils.PixelsPerUnit) * Utils.Pixel;
+				return Vector3.up * (((int) heightTile.Height - Utils.PixelsPerUnit) * Utils.Pixel);
 			}
 		}
 

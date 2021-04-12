@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class GameController : Singleton<GameController>
 {
 	
-	[SerializeField] private Obstacle boardItem;
+	[SerializeField] private Piece piece;
 	[SerializeField] private Vector2Int target;
+	
+	
 	[SerializeField] private Color focusedTileColour;
 	[SerializeField] private GameMode gameMode;
 	
@@ -17,12 +20,14 @@ public class GameController : Singleton<GameController>
 	public static Color FocusedTileColour => Instance.focusedTileColour;
 
 	public static GameMode GameMode => Instance.gameMode;
-
+	
 	[InspectorButton]
 	private void MoveToTarget()
 	{
-		//For testing purposes
-		BoardController.MoveBoardItemTo(boardItem, target);
+		if (piece.GetMoves().Contains(target))
+		{
+			BoardController.MoveBoardItemTo(piece, target);
+		}
 	}
 
 	[InspectorButton]
@@ -38,12 +43,6 @@ public class GameController : Singleton<GameController>
 		// 	.ForEach(m => Debug.Log(m));
 	}
 
-	[InspectorButton]
-	private void BoardPosition()
-	{
-		Debug.Log(BoardController.WorldPositionToBoardPosition(boardItem.transform.position));
-	}
-	
 	public static void NextRound()
 	{
 		Round++;
@@ -52,7 +51,7 @@ public class GameController : Singleton<GameController>
 	public static void SetCurrentTeam(Team team)
 	{
 		CurrentTeam = team;
-		if (CurrentTeam == Team.White)
+		if (CurrentTeam == Team.Blue)
 			NextRound();
 	}
 
@@ -65,6 +64,16 @@ public class GameController : Singleton<GameController>
 	// Update is called once per frame
 	private void Update ()
 	{
+		if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
+		{
+			Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition);
+			if (piece.GetMoves().Contains(boardPosition))
+			{
+				BoardController.MoveBoardItemTo(piece, boardPosition);
+			}
+		}
+		
+		
 		//    Example function call
 		if(Input.GetMouseButtonDown(Utils.RightMouseButton))
 		{

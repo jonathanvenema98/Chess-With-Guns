@@ -40,6 +40,11 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     protected abstract void Initialise();
 
     protected abstract void UpdateFunctionality();
+
+    protected void ResetZoom()
+    {
+        newZoom = hasMaxZoom ? maxZoom : camera.orthographicSize;
+    }
     
     protected void Update()
     {

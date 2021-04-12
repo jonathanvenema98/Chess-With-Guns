@@ -1,43 +1,58 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-
-
-
-
-
-public abstract class Piece
+[RequireComponent(typeof(SpriteRenderer))]
+public abstract class Piece : MonoBehaviour, IBoardItem
 {
-    //fields
-    public vector2int boardposition;
-    public Team team;
+    public Transform Transform => transform;
+    public Vector2Int BoardPosition { get; set; }
+    public Team Team { get; protected set; }
+    public int MaxHealth { get; protected set; }
+    public int CurrentHealth { get; protected set; }
+    public bool IsDead { get; protected set; }
+    
+    public abstract IEnumerable<Vector2Int> GetRelativeMoves();
 
+    public abstract IEnumerable<Vector2Int> ValidateRelativeMoves(IEnumerable<Vector2Int> relativeMoves);
 
-    //constructor
-    public Piece(int x, int y, Player player)
+    public IEnumerable<Vector2Int> GetMoves()
     {
-        this.x = x;
-        this.y = y;
-        this.team = team;
-
+        return ValidateRelativeMoves(
+            ConvertRelativePositions(
+                GetRelativeMoves()));
+    }
+    
+    public IEnumerable<Vector2Int> GetAttacks()
+    {
+        return ValidateRelativeAttacks(
+            ConvertRelativePositions(
+                GetRelativeAttacks()));
     }
 
+    public abstract IEnumerable<Vector2Int> GetRelativeAttacks();
 
-
-    //move method
-    public abstract List<vector2int> ValidMoves()
+    public abstract IEnumerable<Vector2Int> ValidateRelativeAttacks(IEnumerable<Vector2Int> relativeAttacks);
+    
+    public void TakeDamage(int amount)
     {
-        List<Vector2Int> PossibleMoves = new List<Vector2Int>()
+        CurrentHealth -= amount;
 
-        Vector2Int moveup = new Vector2Int(0, 1);
-        Vector2Int movedown = new Vector2Int(0, -1);
-        Vector2Int moveleft = new Vector2Int(-1, 0);
-        Vector2Int moveright = new Vector2Int(1, 0);
-
-        if (BoardController.IsWithinBoard() && BoardController.IsBoardItemAt = 0)
-
+        if (CurrentHealth <= 0)
+        {
+            IsDead = true;
+            CurrentHealth = 0;
+        }
     }
+
+    //Changes the relative positions to be based on the particular team that the piece is on.
+    public IEnumerable<Vector2Int> ConvertRelativePositions(IEnumerable<Vector2Int> relativePositions)
+    {
+        return relativePositions.Select(position => Team == Team.Blue ? position : -position);
+    }
+
+    public virtual void OnPieceMove() { } 
+}
 
    
 

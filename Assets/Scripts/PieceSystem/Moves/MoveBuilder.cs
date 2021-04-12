@@ -91,7 +91,7 @@ public class MoveBuilder
 	
 	private Vector2Int RelativeDirection(Vector2Int direction)
 	{
-		return piece.Team == Team.Black
+		return piece.Team == Team.Red
 			? direction * -1
 			: direction;
 	}

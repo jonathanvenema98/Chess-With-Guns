@@ -6,6 +6,6 @@ public class BeginState : State
     {
         Debug.Log("The match has started");
         
-        StateMachine.Instance.SetState(new PlayerTurnState(Team.White));
+        StateMachine.Instance.SetState(new PlayerTurnState(Team.Blue));
     }
 }
