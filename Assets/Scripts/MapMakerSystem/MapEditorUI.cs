@@ -3,18 +3,21 @@ using UnityEngine;
 public class MapEditorUI : MonoBehaviour
 {
     [SerializeField] private GameObject ingameUI;
-
-    private GameObject buttonMenu;
+    
     private GameObject saveLevelMenu;
     private GameObject loadLevelMenu;
 
     private void Start()
     {
-        // buttonMenu = UIController.GenerateUI("Button Menu",
-        //     UIController.Size.Partial, UIController.Anchor.TopLeft, 200F,
-        //     TextModule.Title("Controls"),
-        //     LineModule.Create());
-        
+        UIController.GenerateUI("Button Menu", ingameUI.transform,
+            UIController.Size.Partial, UIController.Anchor.TopLeft, 170F,
+            TextModule.Title("Controls", 22F),
+            LineModule.Create(),
+            ButtonModule.Of("Save Level", _ => DisplaySaveMenu()),
+            ButtonModule.Of("Load Level", _ => DisplayLoadMenu()),
+            ButtonModule.Of("Clear Level", _ => ClearLevel()),
+            ButtonModule.Of("Reset Camera", _ => MapEditorCameraController.ResetPosition()));
+
         saveLevelMenu =
             UIController.GenerateFullScreenUI("Save Level Menu",
                 TextModule.Title("Save Level"),

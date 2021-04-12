@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2476164157516137523}
   - component: {fileID: 2476164157516137525}
   - component: {fileID: 4635178470345519663}
+  - component: {fileID: 3621511994615116593}
   m_Layer: 0
   m_Name: FullScreenUI
   m_TagString: Untagged
@@ -102,3 +103,15 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3621511994615116593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476164157516137526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e2ec6aa03c49d199cda08e5acee284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

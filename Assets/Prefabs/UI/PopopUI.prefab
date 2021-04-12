@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6115293050348189362}
   - component: {fileID: 6115293050348189363}
   - component: {fileID: 531162584850148976}
+  - component: {fileID: 672133208915469307}
   m_Layer: 0
   m_Name: PopopUI
   m_TagString: Untagged
@@ -117,3 +118,15 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &672133208915469307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115293050348189361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e2ec6aa03c49d199cda08e5acee284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,7 +11,7 @@ public class CameraController : AbstractCameraController<CameraController>
 
     protected override void Initialise()
     {
-        maxZoom = BoardController.BoardLength + 4;
+        maxZoom = BoardController.BoardLength * 1.5F + BoardController.UnitsPerTile;
     }
 
     protected override void UpdateFunctionality()

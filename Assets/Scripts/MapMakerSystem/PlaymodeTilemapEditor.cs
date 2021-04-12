@@ -10,10 +10,7 @@ using UnityTileData = UnityEngine.Tilemaps.TileData;
 public class PlaymodeTilemapEditor : Singleton<PlaymodeTilemapEditor>, ITilemapDriver
 {
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private Transform obj;
-    [SerializeField] private Vector2Int target;
-    
-    
+
     private List<TileData> changedTiles;
 
     private bool MadeChanges => changedTiles.Count != 0;

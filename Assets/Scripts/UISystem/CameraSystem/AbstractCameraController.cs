@@ -44,6 +44,9 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     protected void Update()
     {
         keyMoveSpeed = Input.GetKey(KeyCode.LeftShift) ? fastKeyMoveSpeed : normalKeyMoveSpeed;
+
+        if (UIController.IsUIActive)
+            return;
         
         UpdateFunctionality();
         RestrictZoom();

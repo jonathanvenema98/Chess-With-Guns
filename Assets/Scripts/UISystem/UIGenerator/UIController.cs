@@ -26,6 +26,7 @@ public class UIController : Singleton<UIController>
     public static ButtonModule CreateButtonModule => Instantiate(Instance.buttonModulePrefab);
     public static SpacerModule CreateSpacerModule => Instantiate(Instance.spacerModulePrefab);
 
+    public static bool IsUIActive { get; set; }
 
     private static readonly Dictionary<Anchor, Action<RectTransform>> GetAnchorSetter =
         new Dictionary<Anchor, Action<RectTransform>>
@@ -36,18 +37,66 @@ public class UIController : Singleton<UIController>
                 rectTransform.anchorMax = new Vector2(0, 1);
                 rectTransform.pivot = new Vector2(0, 1);
             }},
-            {Anchor.TopRight, rectTransform => { rectTransform.anchorMin = new Vector2(1, 1); rectTransform.anchorMax = new Vector2(1, 1); }},
-            {Anchor.Fill, rectTransform => { rectTransform.anchorMin = new Vector2(0, 0); rectTransform.anchorMax = new Vector2(1, 1); }},
-            {Anchor.Centre, rectTransform => { rectTransform.anchorMin = new Vector2(0.5F, 0.5F); rectTransform.anchorMax = new Vector2(0.5F, 0.5F); }},
-            {Anchor.BottomLeft, rectTransform => { rectTransform.anchorMin = new Vector2(0, 0); rectTransform.anchorMax = new Vector2(0, 0); }},
-            {Anchor.BottomRight, rectTransform => { rectTransform.anchorMin = new Vector2(1, 0); rectTransform.anchorMax = new Vector2(1, 0); }},
+            {Anchor.TopCentre, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0.5F, 1);
+                rectTransform.anchorMax = new Vector2(0.5F, 1);
+                rectTransform.pivot = new Vector2(0.5F, 1);
+            }},
+            {Anchor.TopRight, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(1, 1);
+                rectTransform.anchorMax = new Vector2(1, 1);
+                rectTransform.pivot = new Vector2(1, 1);
+            }},
+            {Anchor.CentreLeft, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0, 0.5F);
+                rectTransform.anchorMax = new Vector2(0, 0.5F);
+                rectTransform.pivot = new Vector2(0, 0.5F);
+            }},
+            {Anchor.Centre, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0.5F, 0.5F);
+                rectTransform.anchorMax = new Vector2(0.5F, 0.5F);
+                rectTransform.pivot = new Vector2(0.5F, 0.5F);
+            }},
+            {Anchor.CentreRight, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(1, 0.5F);
+                rectTransform.anchorMax = new Vector2(1, 0.5F);
+                rectTransform.pivot = new Vector2(1, 0.5F);
+            }},
+            {Anchor.BottomLeft, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0, 0);
+                rectTransform.anchorMax = new Vector2(0, 0);
+                rectTransform.pivot = new Vector2(0, 0);
+            }},
+            {Anchor.BottomCentre, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0.5F, 0);
+                rectTransform.anchorMax = new Vector2(0.5F, 0);
+                rectTransform.pivot = new Vector2(0.5F, 0);
+            }},
+            {Anchor.BottomRight, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(1, 0);
+                rectTransform.anchorMax = new Vector2(1, 0);
+                rectTransform.pivot = new Vector2(1, 0);
+            }},
+            {Anchor.Fill, rectTransform =>
+            {
+                rectTransform.anchorMin = new Vector2(0, 0);
+                rectTransform.anchorMax = new Vector2(1, 1);
+                rectTransform.pivot = new Vector2(0.5F, 0.5F);
+            }}
         };
     
-    
-
-    public static GameObject GenerateUI(string name, Size size, Anchor anchor, float width, params Module[] modules)
+    public static GameObject GenerateUI(string name, Transform parent, Size size, Anchor anchor, float width, params Module[] modules)
     {
-        var container = size == Size.Fullscreen ? CreateFullScreenUI : CreatePopupUI;
+        var containerPrefab = size == Size.Fullscreen ? Instance.fullScreenUIPrefab : Instance.popupUIPrefab;
+        var container = Instantiate(containerPrefab, parent);
         container.name = name;
         var rect = container.GetComponent<RectTransform>();
         GetAnchorSetter[anchor].Invoke(rect);
@@ -130,6 +179,6 @@ public class UIController : Singleton<UIController>
 
     public enum Anchor
     {
-        TopLeft, TopRight, Centre, Fill, BottomLeft, BottomRight
+        TopLeft, TopCentre, TopRight, CentreLeft, Centre, CentreRight, BottomLeft, BottomCentre, BottomRight, Fill
     }
 }
