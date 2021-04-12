@@ -526,7 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  maxHealth: 2
+  maxHealth: 1
+  attackType: 0
 --- !u!212 &302498542
 SpriteRenderer:
   m_ObjectHideFlags: 0

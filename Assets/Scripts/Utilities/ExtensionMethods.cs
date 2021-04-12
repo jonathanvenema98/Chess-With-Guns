@@ -1,17 +1,29 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public static class ExtensionMethods
 {
-    public static bool HasFlag(this Enum flags, Enum flag)
+    #region Enum Flags
+
+    public static bool HasFlag<T>(this T flagEnum, T flag) where T : IConvertible
     {
-        int flagsValue = (int) (object) flags;
-        int flagValue = (int) (object) flag;
-        return (flagsValue & flagValue) == flagValue;
+        int flagEnumValue = (int) (IConvertible) flagEnum;
+        int flagValue     = (int) (IConvertible) flag;
+        return (flagEnumValue & flagValue) == flagValue;
     }
-    
+
+    public static IEnumerable<T> GetFlags<T>(this T flagEnum) where T : IConvertible
+    {
+        return Enum.GetValues(typeof(T))
+            .Cast<T>()
+            .Where(flag => HasFlag(flagEnum, flag));
+    }
+
+    #endregion
+
     public static List<Vector3Int> GetAllTilePositions(this Tilemap tilemap)
     {
         var tilePositions = new List<Vector3Int>();

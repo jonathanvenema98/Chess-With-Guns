@@ -5,12 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Piece : MonoBehaviour, IBoardItem
 {
+    [SerializeField] private Team team;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private AttackType attackType;
+    [SerializeField] private int attackDamage;
+    [SerializeField] private PieceType pieceType;
+    
     public Transform Transform => transform;
     public Vector2Int BoardPosition { get; set; }
-    public Team Team { get; protected set; }
-    public int MaxHealth { get; protected set; }
+    public Team Team { get; private set; }
+    public int MaxHealth { get; private set; }
+    public AttackType AttackType { get; private set; }
+    public int AttackDamage { get; private set; }
+    public PieceType PieceType { get; private set; }
     public int CurrentHealth { get; protected set; }
     public bool IsDead { get; protected set; }
+
+    private void Start()
+    {
+        Team = team;
+        MaxHealth = maxHealth;
+        CurrentHealth = MaxHealth;
+        AttackType = attackType;
+        AttackDamage = attackDamage;
+        PieceType = pieceType;
+    }
+    
     
     public abstract IEnumerable<Vector2Int> GetRelativeMoves();
 

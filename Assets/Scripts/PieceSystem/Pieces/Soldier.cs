@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class Soldier : Piece
 {
-    [SerializeField] private Team team;
-    [SerializeField] private int maxHealth;
-    
     private bool isFirstMove = true;
-    
-    private void Start()
-    {
-        Team = team;
-        MaxHealth = maxHealth;
-        CurrentHealth = MaxHealth;
-    }
-    
+
     public override IEnumerable<Vector2Int> GetRelativeMoves()
     {
         List<Vector2Int> relativeMoves = new List<Vector2Int>
