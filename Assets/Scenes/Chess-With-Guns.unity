@@ -528,6 +528,9 @@ MonoBehaviour:
   team: 0
   maxHealth: 1
   attackType: 0
+  attackDamage: 1
+  pieceType: 0
+  acceptableTerrainTypes: 00000000
 --- !u!212 &302498542
 SpriteRenderer:
   m_ObjectHideFlags: 0

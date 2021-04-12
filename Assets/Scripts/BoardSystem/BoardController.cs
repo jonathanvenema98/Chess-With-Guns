@@ -117,14 +117,12 @@ public class BoardController : Singleton<BoardController>
 
 	public static bool IsPieceAt(Vector2Int boardPosition)
 	{
-		return IsBoardItemAt(boardPosition) && GetBoardItemAt(boardPosition) is IPiece;
+		return IsBoardItemAt(boardPosition) && GetBoardItemAt(boardPosition) is Piece;
 	}
 
 	public static bool IsWithinBoard(Vector2Int boardPosition)
 	{
-		return Application.isPlaying
-		       && boardPosition.x >= 0 && boardPosition.x < BoardSize.x
-		       && boardPosition.y >= 0 && boardPosition.y < BoardSize.y;
+		return Application.isPlaying && BoardTilemap.HasTile(BoardPositionToCellPosition(boardPosition));
 	}
 
 	public static Vector3 BoardPositionToWorldPosition(Vector2Int boardPosition)
@@ -182,13 +180,13 @@ public class BoardController : Singleton<BoardController>
 
 	public static bool IsFriendlyAt(Vector2Int boardPosition, Team playerTeam)
 	{
-		IPiece piece = GetBoardItemAt<IPiece>(boardPosition);
+		Piece piece = GetBoardItemAt<Piece>(boardPosition);
 		return piece != null && piece.Team == playerTeam;
 	}
 	
 	public static bool IsEnemyAt(Vector2Int boardPosition, Team playerTeam)
 	{
-		IPiece piece = GetBoardItemAt<IPiece>(boardPosition);
+		Piece piece = GetBoardItemAt<Piece>(boardPosition);
 		return piece != null && piece.Team != playerTeam;
 	}
 
@@ -216,17 +214,21 @@ public class BoardController : Singleton<BoardController>
 	/// <returns>The world height offset of the tile</returns>
 	public static Vector3 GetWorldHeightOffsetAt(Vector2Int boardPosition)
 	{
-		if (IsWithinBoard(boardPosition))
+		var cellPosition = BoardPositionToCellPosition(boardPosition);
+		if (BoardTilemap.HasTile(cellPosition))
 		{
-			var cellPosition = BoardPositionToCellPosition(boardPosition);
-			var tile = BoardTilemap.GetTile(cellPosition);
-			if (tile is HeightTile heightTile)
-			{
-				return Vector3.up * (((int) heightTile.Height - Utils.PixelsPerUnit) * Utils.Pixel);
-			}
+			var heightTile = BoardTilemap.GetTile<HeightTile>(cellPosition);
+			return Vector3.up * (((int) heightTile.Height - Utils.PixelsPerUnit) * Utils.Pixel);
 		}
 
 		return Vector3.zero;
+	}
+
+	public static bool CanPieceMoveTo(Piece piece, Vector2Int toBoardPosition)
+	{
+		var cellPosition = BoardPositionToCellPosition(toBoardPosition);
+		return BoardTilemap.HasTile(cellPosition)
+		       && piece.AcceptableTerrainTypes.Contains(BoardTilemap.GetTile<HeightTile>(cellPosition).TerrainType);
 	}
 
 	public static void HideBorderAt(Vector2Int boardPosition)

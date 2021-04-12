@@ -6,8 +6,7 @@ public class GameController : Singleton<GameController>
 	
 	[SerializeField] private Piece piece;
 	[SerializeField] private Vector2Int target;
-	
-	
+
 	[SerializeField] private Color focusedTileColour;
 	[SerializeField] private GameMode gameMode;
 	
@@ -20,7 +19,7 @@ public class GameController : Singleton<GameController>
 	public static Color FocusedTileColour => Instance.focusedTileColour;
 
 	public static GameMode GameMode => Instance.gameMode;
-	
+
 	[InspectorButton]
 	private void MoveToTarget()
 	{
@@ -33,14 +32,11 @@ public class GameController : Singleton<GameController>
 	[InspectorButton]
 	private void LogMoves()
 	{
-		//For testing purposes
-		// MoveBuilder.For(boardItem)
-		// 	.WhereNot(MoveOptions.BoardItem)
-		// 	.ForwardUntilBlocked(2)
-		// 	.DiagonallyLeftUntilBlocked(1)
-		// 	.DiagonallyRightUntilBlocked(1)
-		// 	.Build()
-		// 	.ForEach(m => Debug.Log(m));
+		ActionBuilder.For(piece)
+			.Straight(1, ActionOption.IsUnoccupied | ActionOption.ValidTerrainType | ActionOption.UntilBlocked)
+			.Build()
+			.ForEach(action => Debug.Log(action));
+
 	}
 
 	public static void NextRound()
@@ -58,7 +54,7 @@ public class GameController : Singleton<GameController>
 	// Use this for initialization
 	private void Start ()
 	{
-		
+		piece.BoardPosition = new Vector2Int(1, 1);
 	}
 	
 	// Update is called once per frame

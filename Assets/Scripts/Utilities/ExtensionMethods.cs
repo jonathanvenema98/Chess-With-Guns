@@ -19,7 +19,7 @@ public static class ExtensionMethods
     {
         return Enum.GetValues(typeof(T))
             .Cast<T>()
-            .Where(flag => HasFlag(flagEnum, flag));
+            .Where(flag => (int) (IConvertible) flag != 0 && HasFlag(flagEnum, flag));
     }
 
     #endregion

@@ -29,6 +29,7 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     private void Start()
     {
         Initialise();
+        
         hasMaxZoom = Utils.NotEqual(maxZoom, -1);
 
         newPosition = transform.position;

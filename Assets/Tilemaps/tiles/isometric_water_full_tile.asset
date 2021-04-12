@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 97d98c61fdde5824b95d7d6d41511315, type: 3}
   height: 16
+  terrainType: 1
