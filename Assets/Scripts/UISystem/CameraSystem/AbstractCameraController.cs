@@ -29,7 +29,10 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     private void Start()
     {
         Initialise();
-        
+
+        moveDuration = PlayerPrefs.GetFloat("ZoomSpeed");
+        mouseZoomSpeed = PlayerPrefs.GetFloat("ZoomSensitivity");
+
         hasMaxZoom = Utils.NotEqual(maxZoom, -1);
 
         newPosition = transform.position;
