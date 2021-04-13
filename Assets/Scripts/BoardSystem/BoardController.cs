@@ -48,47 +48,6 @@ public class BoardController : Singleton<BoardController>
 		boardTilemap.layoutGrid.cellSize = new Vector3(UnitsPerTile, HalfUnitsPerTile, UnitsPerTile);
 	}
 
-	// [InspectorButton]
-	// private void GenerateBoard()
-	// {
-	// 	tilePositionOffset = boardSize / 2;
-	//
-	// 	if (tileA == null || tileB == null || boardTilemap == null)
-	// 	{
-	// 		Debug.LogWarning(
-	// 			"Make sure all the necessary assets are set in the inspector before trying to update the board");
-	// 		return;
-	// 	}
-	//
-	// 	//The board is already the correct size
-	// 	if (boardTilemap.size.x / UnitsPerTile == boardSize.x && boardTilemap.size.y / UnitsPerTile == boardSize.y)
-	// 		return;
-	//
-	// 	//Clear the previous board
-	// 	boardTilemap.ClearAllTiles();
-	// 	boardTilemap.layoutGrid.cellSize = new Vector3(1, 1) * unitsPerTile;
-	//
-	// 	for (int x = 0; x < boardSize.x; x++)
-	// 	{
-	// 		for (int y = 0; y < boardSize.y; y++)
-	// 		{
-	// 			Vector3Int tilePosition = new Vector3Int(x - tilePositionOffset.x, y - tilePositionOffset.y, 0);
-	// 			Tile tile = DetermineTile(x, y);
-	//
-	// 			boardTilemap.SetTile(tilePosition, tile);
-	// 		}
-	// 	}
-	//
-	// 	boardTilemap.ResizeBounds();
-	// }
-
-	// private Tile DetermineTile(int x, int y)
-	// {
-	// 	return y % 2 == x % 2
-	// 		? tileA
-	// 		: tileB;
-	// }
-
 	public static IBoardItem GetBoardItemAt(Vector2Int boardPosition)
 	{
 		return IsWithinBoard(boardPosition)

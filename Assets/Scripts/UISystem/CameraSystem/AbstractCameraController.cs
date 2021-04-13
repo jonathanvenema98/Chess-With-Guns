@@ -4,17 +4,18 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
 {
     [Header("General")]
     [SerializeField] protected new Camera camera;
-    [SerializeField] protected float moveDuration;
-    
+
     [Header("Zooming")]
+    [SerializeField] protected float zoomSpeed;
     [SerializeField] protected float initialZoomIn;
-    [SerializeField] protected float mouseZoomSpeed;
+    [SerializeField] protected float mouseZoomSensitivity;
     [SerializeField] protected float keyZoomSpeed;
     [SerializeField] protected float minZoom;
 
     [Header("Movement")]
-    [SerializeField] protected float normalKeyMoveSpeed;
-    [SerializeField] protected float fastKeyMoveSpeed;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float normalKeyMoveSensitivity;
+    [SerializeField] protected float fastKeyMoveSensitivity;
     [SerializeField] protected bool usePanning;
     [SerializeField] protected float panMoveSpeed;
     [Tooltip("Note: This is in pixels"), SerializeField] protected Vector2 panBorder;
@@ -30,8 +31,8 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     {
         Initialise();
 
-        moveDuration = PlayerPrefs.GetFloat("ZoomSpeed");
-        mouseZoomSpeed = PlayerPrefs.GetFloat("ZoomSensitivity");
+        zoomSpeed = PlayerPrefs.GetFloat("ZoomSpeed", DefaultOptions.DefaultZoomSpeed);
+        mouseZoomSensitivity = PlayerPrefs.GetFloat("ZoomSensitivity", DefaultOptions.DefaultZoomSensitivity);
 
         hasMaxZoom = Utils.NotEqual(maxZoom, -1);
 
@@ -52,7 +53,7 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     
     protected void Update()
     {
-        keyMoveSpeed = Input.GetKey(KeyCode.LeftShift) ? fastKeyMoveSpeed : normalKeyMoveSpeed;
+        keyMoveSpeed = Input.GetKey(KeyCode.LeftShift) ? fastKeyMoveSensitivity : normalKeyMoveSensitivity;
 
         if (UIController.IsUIActive)
             return;
@@ -69,7 +70,7 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
         //Zooming
         if (Input.mouseScrollDelta.y != 0)
         {
-            newZoom += -Input.mouseScrollDelta.y * mouseZoomSpeed;
+            newZoom += -Input.mouseScrollDelta.y * mouseZoomSensitivity;
         }
         
         //Zoom
@@ -134,8 +135,8 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     private void ApplyMovement()
     {
         if (newPosition != transform.position)
-            transform.position = Vector3.Lerp(transform.position, newPosition, moveDuration * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, newPosition, moveSpeed * Time.deltaTime);
         if (Utils.NotEqual(newZoom, camera.orthographicSize))
-            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, newZoom, moveDuration * Time.deltaTime);
+            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, newZoom, zoomSpeed * Time.deltaTime);
     }
 }
