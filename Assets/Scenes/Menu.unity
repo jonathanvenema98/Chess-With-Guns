@@ -242,7 +242,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 374938782}
   m_HandleRect: {fileID: 1455961722}
   m_Direction: 0
-  m_MinValue: 1
+  m_MinValue: 0.1
   m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 1
@@ -2259,7 +2259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Zoom speed
+  m_Text: Camera speed
 --- !u!222 &1494836688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2433,7 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c7bf98baa2a14e9a898c32fb2cc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeedSlider: {fileID: 1921447788}
+  cameraSpeedSlider: {fileID: 1921447788}
   zoomSensitivitySlider: {fileID: 54082162}
 --- !u!1 &1587050220
 GameObject:
@@ -2757,7 +2757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875593851}
   m_Layer: 5
-  m_Name: ZoomSpeed
+  m_Name: CameraSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2959,8 +2959,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 431378528}
   m_HandleRect: {fileID: 658575054}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 10
+  m_MinValue: 0.1
+  m_MaxValue: 8
   m_WholeNumbers: 0
   m_Value: 1.7
   m_OnValueChanged:
@@ -2968,7 +2968,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1556564015}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: SetZoomSpeed
+        m_MethodName: SetCameraSpeed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

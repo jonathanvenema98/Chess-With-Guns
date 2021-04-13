@@ -4,16 +4,15 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
 {
     [Header("General")]
     [SerializeField] protected new Camera camera;
+    [SerializeField] protected float cameraSpeed;
 
     [Header("Zooming")]
-    [SerializeField] protected float zoomSpeed;
     [SerializeField] protected float initialZoomIn;
     [SerializeField] protected float mouseZoomSensitivity;
     [SerializeField] protected float keyZoomSpeed;
     [SerializeField] protected float minZoom;
 
     [Header("Movement")]
-    [SerializeField] protected float moveSpeed;
     [SerializeField] protected float normalKeyMoveSensitivity;
     [SerializeField] protected float fastKeyMoveSensitivity;
     [SerializeField] protected bool usePanning;
@@ -31,8 +30,8 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     {
         Initialise();
 
-        zoomSpeed = PlayerPrefs.GetFloat("ZoomSpeed", DefaultOptions.DefaultZoomSpeed);
-        mouseZoomSensitivity = PlayerPrefs.GetFloat("ZoomSensitivity", DefaultOptions.DefaultZoomSensitivity);
+        cameraSpeed = PlayerPrefs.GetFloat("CameraSpeed", Settings.DefaultCameraSpeed);
+        mouseZoomSensitivity = PlayerPrefs.GetFloat("ZoomSensitivity", Settings.DefaultZoomSensitivity);
 
         hasMaxZoom = Utils.NotEqual(maxZoom, -1);
 
@@ -135,8 +134,8 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     private void ApplyMovement()
     {
         if (newPosition != transform.position)
-            transform.position = Vector3.Lerp(transform.position, newPosition, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, newPosition, cameraSpeed * Time.deltaTime);
         if (Utils.NotEqual(newZoom, camera.orthographicSize))
-            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, newZoom, zoomSpeed * Time.deltaTime);
+            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, newZoom, cameraSpeed * Time.deltaTime);
     }
 }

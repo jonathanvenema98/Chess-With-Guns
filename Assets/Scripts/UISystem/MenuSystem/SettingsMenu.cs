@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public Slider zoomSpeedSlider;
+    public Slider cameraSpeedSlider;
     public Slider zoomSensitivitySlider;
 
     private void Start()
     {
-        zoomSpeedSlider.value = PlayerPrefs.GetFloat("ZoomSpeed", DefaultOptions.DefaultZoomSpeed);
-        zoomSensitivitySlider.value = PlayerPrefs.GetFloat("ZoomSensitivity", DefaultOptions.DefaultZoomSensitivity);
+        cameraSpeedSlider.value = PlayerPrefs.GetFloat("CameraSpeed", Settings.DefaultCameraSpeed);
+        zoomSensitivitySlider.value = PlayerPrefs.GetFloat("ZoomSensitivity", Settings.DefaultZoomSensitivity);
     }
 
-    public void SetZoomSpeed(float zoomSpeed)
+    public void SetCameraSpeed(float cameraSpeed)
     {
-        PlayerPrefs.SetFloat("ZoomSpeed", zoomSpeed);
+        PlayerPrefs.SetFloat("CameraSpeed", cameraSpeed);
     }
     public void SetZoomSensitivity(float zoomSensitivity)
     {

@@ -740,12 +740,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 519420031}
-  zoomSpeed: 1.7
+  cameraSpeed: 2
   initialZoomIn: 10
   mouseZoomSensitivity: 1
   keyZoomSpeed: 0.5
   minZoom: 6
-  moveSpeed: 1.7
   normalKeyMoveSensitivity: 0
   fastKeyMoveSensitivity: 0
   usePanning: 0
