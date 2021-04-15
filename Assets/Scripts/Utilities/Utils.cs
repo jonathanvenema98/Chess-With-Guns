@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Utils : Singleton<Utils>
 {
@@ -39,6 +41,15 @@ public class Utils : Singleton<Utils>
     public const string HorizontalAxis = "Horizontal";
 
     public static Vector3 MouseWorldPosition => mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    
+    public static bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
     
     #endregion
 

@@ -16,7 +16,7 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     [SerializeField] protected float normalKeyMoveSensitivity;
     [SerializeField] protected float fastKeyMoveSensitivity;
     [SerializeField] protected bool usePanning;
-    [SerializeField] protected float panMoveSpeed;
+    [SerializeField] protected float panMoveSensitivity;
     [Tooltip("Note: This is in pixels"), SerializeField] protected Vector2 panBorder;
 
     protected float maxZoom = -1;
@@ -87,27 +87,27 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     {
         //Panning
         if (usePanning && Input.mousePosition.x >= 0 && Input.mousePosition.x < Screen.width
-            && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height)
+            && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height && !Utils.IsPointerOverUIObject())
         {
             
             if (Input.mousePosition.y > Screen.height - panBorder.y)
             {
-                newPosition += transform.up * panMoveSpeed;
+                newPosition += transform.up * panMoveSensitivity;
             }
 
             if (Input.mousePosition.y < panBorder.y)
             {
-                newPosition -= transform.up * panMoveSpeed;
+                newPosition -= transform.up * panMoveSensitivity;
             }
 
             if (Input.mousePosition.x > Screen.width - panBorder.x)
             {
-                newPosition += transform.right * panMoveSpeed;
+                newPosition += transform.right * panMoveSensitivity;
             }
 
             if (Input.mousePosition.x < panBorder.x)
             {
-                newPosition -= transform.right * panMoveSpeed;
+                newPosition -= transform.right * panMoveSensitivity;
             }
         }
 
