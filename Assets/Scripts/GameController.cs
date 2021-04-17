@@ -62,20 +62,19 @@ public class GameController : Singleton<GameController>
 	// Use this for initialization
 	private void Start ()
 	{
-		piece.BoardPosition = new Vector2Int(1, 1);
 	}
 	
 	// Update is called once per frame
 	private void Update ()
 	{
-		if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
-		{
-			Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition);
-			if (piece.GetMoves().Contains(boardPosition))
-			{
-				BoardController.MoveBoardItemTo(piece, boardPosition);
-			}
-		}
+		// if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
+		// {
+		// 	Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition);
+		// 	if (piece.GetMoves().Contains(boardPosition))
+		// 	{
+		// 		BoardController.MoveBoardItemTo(piece, boardPosition);
+		// 	}
+		// }
 		
 		
 		//    Example function call

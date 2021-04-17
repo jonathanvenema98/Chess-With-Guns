@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Piece : MonoBehaviour, IBoardItem
 {
+    [SerializeField] private Sprite sprite;
     [SerializeField] private Team team;
     [SerializeField] private int maxHealth;
     [SerializeField] private AttackType attackType;
@@ -19,6 +19,7 @@ public abstract class Piece : MonoBehaviour, IBoardItem
     public int AttackDamage => attackDamage;
     public PieceType PieceType => pieceType;
     public List<TerrainType> AcceptableTerrainTypes => acceptableTerrainTypes;
+    public Sprite Sprite => sprite;
     public int CurrentHealth { get; protected set; }
     public bool IsDead { get; protected set; }
     public Vector2Int BoardPosition { get; set; }
@@ -47,6 +48,25 @@ public abstract class Piece : MonoBehaviour, IBoardItem
     public virtual void OnPieceMove() { } 
     
     public virtual void OnDeath() { }
+
+    public Piece Instantiate(Transform parent)
+    {
+        Piece piece = Instantiate(this, parent);
+        piece.name = name;
+        return piece;
+    }
+    
+    public override bool Equals(object other)
+    {
+        return other is Piece piece
+               && piece.team == Team
+               && piece.name == name;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }
 
    

@@ -2,6 +2,14 @@
 <ListDataOfNameChangeData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Data>
     <NameChangeData>
+      <From>TilePosition</From>
+      <To>CellPosition</To>
+    </NameChangeData>
+    <NameChangeData>
+      <From>TileName</From>
+      <To>Name</To>
+    </NameChangeData>
+    <NameChangeData>
       <From>TilemapCentre</From>
       <To>TilemapSize</To>
     </NameChangeData>

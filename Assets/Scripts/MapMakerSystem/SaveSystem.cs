@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,9 +10,10 @@ using UnityEngine.Tilemaps;
 public class SaveSystem : Singleton<SaveSystem>
 {
     [SerializeField] private List<HeightTile> tiles;
-    [SerializeField] private Grid gridPalette;
+    [SerializeField] private List<Piece> pieces;
 
     public static List<HeightTile> Tiles => Instance.tiles;
+    public static List<Piece> Pieces => Instance.pieces;
     
     #region FileIO
     
@@ -99,49 +101,66 @@ public class SaveSystem : Singleton<SaveSystem>
     
     #region Levels
     
-    public static void SaveLevel(ITilemapDriver tilemapDriver, string levelName)
+    public static void SaveLevel(ISaveLevelDriver saveLevelDriver, string levelName)
     {
-        var tilemapData = new TilemapData(tilemapDriver.Tilemap
+        var tilemapData = new TilemapData(saveLevelDriver.Tilemap
             .GetAllTilePositions()
-            .Select(position => new TileData(position, tilemapDriver.Tilemap.GetTile(position).name))
+            .Select(position => new TileData(position, saveLevelDriver.Tilemap.GetTile(position).name))
             .ToList());
 
-        var levelData = new LevelData(tilemapData, tilemapDriver.Tilemap);
+        var pieceData = new ListData<PieceData>(
+            saveLevelDriver.GetPieces()
+            .Select(piece => new PieceData {CellPosition = BoardController.V2ToV3(piece.BoardPosition), Name = piece.name, Team = piece.Team})
+            .ToList());
+
+        var levelData = new LevelData(tilemapData, pieceData, saveLevelDriver.Tilemap);
         SaveData(levelName, levelData);
     }
 
-    public static LevelData LoadLevel(ITilemapDriver tilemapDriver, string levelName)
+    public static void LoadLevel(ILoadLevelDriver loadLevelDriver, string levelName, Action<LevelData> preloadInitialisation = null)
     {
         if (!FileExists(levelName))
         {
             Debug.LogWarning($"The level {levelName} doesn't exist.");
-            return new LevelData();
+            return;
         }
 
         var levelData = LoadData<LevelData>(levelName);
+        preloadInitialisation?.Invoke(levelData);
+        
         var tiles = CreateTileMappings();
+        var pieces = CreatePieceMappings();
         
         //Centres the loaded board
-        Vector3Int tilePositionOffset = levelData.TilemapSize / 2 + levelData.TilemapOrigin;
+        Vector3Int cellPositionOffset = levelData.TilemapSize / 2 + levelData.TilemapOrigin;
 
-        tilemapDriver.ClearTilemap();
+        loadLevelDriver.ClearLevel();
         
         foreach (var tileData in levelData.TilemapData.Tiles)
         {
-            if (tiles.TryGetValue(tileData.TileName, out TileBase tile))
+            if (tiles.TryGetValue(tileData.Name, out TileBase tile))
             {
-                Vector3Int tilePosition = tileData.TilePosition - tilePositionOffset;
-                tilemapDriver.SetTile(tilePosition, tile);
+                Vector3Int cellPosition = tileData.CellPosition - cellPositionOffset;
+                loadLevelDriver.SetTile(cellPosition, tile);
             }
-            else
-            {
-                TileNotFound(tileData.TileName);
-            }
+            else TileNotFound(tileData.Name);
         }
 
-        return levelData;
+        foreach (var pieceData in levelData.PieceData.Data)
+        {
+            if (pieces.TryGetValue(pieceData.Name, out Piece piece))
+            {
+                loadLevelDriver.SetPiece(pieceData.CellPosition - cellPositionOffset, piece);
+            }
+            else PieceNotFound(pieceData.Name);
+        }   
     }
 
+    private static void PieceNotFound(string pieceName)
+    {
+        Debug.LogWarning($"Couldn't find the piece: {pieceName}");
+    }
+    
     private static void TileNotFound(string tilename)
     {
         Debug.LogWarning($"Couldn't find the tile: {tilename}");
@@ -161,24 +180,20 @@ public class SaveSystem : Singleton<SaveSystem>
         return tiles;
     }
     
-    // public static Dictionary<string, TileBase> GetTilePalette()
-    // {
-    //     var tiles = new Dictionary<string, TileBase>();
-    //     if (Instance.gridPalette != null)
-    //     {
-    //         Tilemap tilemapPalette = Instance.gridPalette.GetComponentInChildren<Tilemap>();
-    //         if (tilemapPalette != null)
-    //         {
-    //             tilemapPalette
-    //                 .GetAllTilePositions()
-    //                 .Select(position => tilemapPalette.GetTile(position))
-    //                 .ForEach(tile => tiles.Add(tile.name, tile));
-    //         }
-    //     }
-    //
-    //     return tiles;
-    // }
-    
+    public static Dictionary<string, Piece> CreatePieceMappings()
+    {
+        var pieces = new Dictionary<string, Piece>();
+        if (Pieces != null)
+        {
+            foreach (var piece in Pieces)
+            {
+                pieces.Add(piece.name, piece);
+            }
+        }
+
+        return pieces;
+    }
+
     #endregion
 
     #region Serializing

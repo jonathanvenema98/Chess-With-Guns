@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier : Piece
+public class FootSoldier : Piece
 {
     private bool isFirstMove = true;
 
@@ -23,7 +23,6 @@ public class Soldier : Piece
 
     public override void OnPieceMove()
     {
-        Debug.Log("Piece has been moved!");
         isFirstMove = false;
     }
 }

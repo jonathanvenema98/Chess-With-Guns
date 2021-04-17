@@ -4,23 +4,23 @@ using UnityEngine;
 [System.Serializable]
 public class TileData
 {
-    public static TileData ClearTilemap = new TileData(Vector3Int.zero, "ClearTilemap");
+    public static readonly TileData ClearTilemap = new TileData(Vector3Int.zero, "ClearTilemap");
     
-    public SerializableVector3Int TilePosition { get; set; }
-    public string TileName { get; set; }
+    public SerializableVector3Int CellPosition { get; set; }
+    public string Name { get; set; }
 
     public TileData() { }
     
-    public TileData(SerializableVector3Int tilePosition, string tileName)
+    public TileData(SerializableVector3Int cellPosition, string name)
     {
-        TilePosition = tilePosition;
-        TileName = tileName;
+        CellPosition = cellPosition;
+        Name = name;
     }
 
     public override bool Equals(object obj)
     {
         return obj is TileData tileData
-               && tileData.TileName == TileName;
+               && tileData.Name == Name;
     }
 
     //Auto generated method
@@ -29,7 +29,7 @@ public class TileData
     {
         unchecked
         {
-            return ((TilePosition != null ? TilePosition.GetHashCode() : 0) * 397) ^ (TileName != null ? TileName.GetHashCode() : 0);
+            return ((CellPosition != null ? CellPosition.GetHashCode() : 0) * 397) ^ (Name != null ? Name.GetHashCode() : 0);
         }
     }
 }

@@ -2,13 +2,12 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class BoardController : Singleton<BoardController>
+public class BoardController : Singleton<BoardController>, ILoadLevelDriver
 {
 	[SerializeField] private int unitsPerTile;
 	[SerializeField] private Tilemap boardTilemap;
 
-	[SerializeField] private string levelName;
-	
+	[SerializeField] private Transform pieceParent;
 	[SerializeField] private Transform tileBordersParent;
 	[SerializeField] private SpriteRenderer tileBorderPrefab;
 
@@ -21,7 +20,7 @@ public class BoardController : Singleton<BoardController>
 	public static float HalfUnitsPerTile { get; private set; }
 	public static Vector3 WorldOffset { get; private set; }
 	public static Tilemap BoardTilemap { get; private set; }
-	
+
 	public void Initialise()
 	{
 		UnitsPerTile = Instance.unitsPerTile;
@@ -30,19 +29,40 @@ public class BoardController : Singleton<BoardController>
 		BoardTilemap = boardTilemap;
 	}
 
+	#region Level Driver
+
 	public void LoadLevel(string level)
 	{
-		var levelData = SaveSystem.LoadLevel(TilemapDriver.Of(boardTilemap), level);
-		var boardSize = V3ToV2(levelData.TilemapSize);
-		
-		board = new IBoardItem[boardSize.x, boardSize.y];
-		int boardLength = Mathf.Max(boardSize.x, boardSize.y);
-		
-		Debug.Log(board.Length);
-		
-		BoardSize = boardSize;
-		BoardLength = boardLength;
+		SaveSystem.LoadLevel(this, level, levelData =>
+		{
+			var boardSize = V3ToV2(levelData.TilemapSize);
+
+			board = new IBoardItem[boardSize.x, boardSize.y];
+			int boardLength = Mathf.Max(boardSize.x, boardSize.y);
+
+			BoardSize = boardSize;
+			BoardLength = boardLength;
+		});
 	}
+
+	public void ClearLevel()
+	{
+		boardTilemap.ClearAllTiles();
+	}
+
+	public void SetTile(Vector3Int cellPosition, TileBase tile)
+	{
+		boardTilemap.SetTile(cellPosition, tile);
+	}
+
+	public void SetPiece(Vector3Int cellPosition, Piece piece)
+	{
+		SetBoardItemAt(piece.Instantiate(pieceParent), CellPositionToBoardPosition(cellPosition));
+	}
+
+	#endregion
+
+	#region Board Functions
 
 	public static IBoardItem GetBoardItemAt(Vector2Int boardPosition)
 	{
@@ -85,10 +105,15 @@ public class BoardController : Singleton<BoardController>
 		return BoardTilemap.CellToWorld(BoardPositionToCellPosition(boardPosition))
 		       + WorldOffset + GetWorldHeightOffsetAt(boardPosition);
 	}
-	
+
 	public static Vector2Int WorldPositionToBoardPosition(Vector3 worldPosition)
 	{
 		return CellPositionToBoardPosition(BoardTilemap.WorldToCell(worldPosition));
+	}
+
+	public static Vector3 CellPositionToWorldPosition(Vector3Int cellPosition)
+	{
+		return BoardTilemap.CellToWorld(cellPosition);
 	}
 
 	public static Vector2Int V3ToV2(Vector3Int v)
@@ -122,15 +147,31 @@ public class BoardController : Singleton<BoardController>
 	{
 		return V3ToV2(cellPosition - BoardTilemap.origin);
 	}
+	
+	/// <summary>
+	/// Gets the cell position of a world position. Unlike calling Tilemap#WorldToCell directly, this sets the z
+	/// position to 0, to prevent floating tiles.
+	/// </summary>
+	/// <param name="worldPosition">The world position</param>
+	/// <returns>The cell position, with 0 for the z position</returns>
+	public static Vector3Int WorldPositionToCellPosition(Vector3 worldPosition)
+	{
+		var cellPosition = BoardTilemap.WorldToCell(worldPosition);
+		cellPosition.z = 0;
+		return cellPosition;
+	}
 
-	public static bool MoveBoardItemTo<T>(T boardItem, Vector2Int toBoardPosition) where T: IBoardItem
+	public static void MoveBoardItemTo<T>(T boardItem, Vector2Int toBoardPosition) where T: IBoardItem
 	{
 		if (IsBoardItemAt(toBoardPosition) || !IsWithinBoard(toBoardPosition))
-			return false;
+			return;
 		
 		RemoveBoardItemAt(boardItem.BoardPosition);
 		SetBoardItemAt(boardItem, toBoardPosition);
-		return true;
+		if (boardItem is Piece piece)
+		{
+			piece.OnPieceMove();
+		}
 	}
 
 	public static bool IsFriendlyAt(Vector2Int boardPosition, Team playerTeam)
@@ -155,10 +196,6 @@ public class BoardController : Singleton<BoardController>
 		Instance.board[boardPosition.x, boardPosition.y] = boardItem;
 		boardItem.BoardPosition = boardPosition;
 		boardItem.Transform.position = BoardPositionToWorldPosition(boardPosition);
-		if (boardItem is Piece piece)
-		{
-			piece.OnPieceMove();
-		}
 	}
 
 	/// <summary>
@@ -185,6 +222,10 @@ public class BoardController : Singleton<BoardController>
 		return BoardTilemap.HasTile(cellPosition)
 		       && piece.AcceptableTerrainTypes.Contains(BoardTilemap.GetTile<HeightTile>(cellPosition).TerrainType);
 	}
+	
+	#endregion
+
+	#region Borders
 
 	public static void HideBorderAt(Vector2Int boardPosition)
 	{
@@ -209,13 +250,13 @@ public class BoardController : Singleton<BoardController>
 
 		if (!tileBorders.TryGetValue(boardPosition, out var tileBorder))
 		{
-			 tileBorder = Instantiate(
+			tileBorder = Instantiate(
 				Instance.tileBorderPrefab,
 				BoardPositionToWorldPosition(boardPosition),
 				Quaternion.identity,
 				Instance.tileBordersParent);
 
-			 tileBorders[boardPosition] = tileBorder;
+			tileBorders[boardPosition] = tileBorder;
 		}
 
 		tileBorder.enabled = true;
@@ -231,4 +272,7 @@ public class BoardController : Singleton<BoardController>
 			tileBorders.Remove(pair.Key);
 		}
 	}
+
+	#endregion
+	
 }

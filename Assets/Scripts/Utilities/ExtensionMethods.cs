@@ -51,20 +51,6 @@ public static class ExtensionMethods
         tilemap.CompressBounds();
         //The tilemap size will always be 1 on the z-axis
         return tilemap.size == Vector3Int.forward;
-    } 
-    
-    /// <summary>
-    /// Gets the cell position of a world position. Unlike calling Tilemap#WorldToCell directly, this sets the z
-    /// position to 0, to prevent floating tiles.
-    /// </summary>
-    /// <param name="tilemap">The tilemap to find the equivalent cell position for</param>
-    /// <param name="worldPosition">The world position</param>
-    /// <returns>The cell position, with 0 for the z position</returns>
-    public static Vector3Int WorldPositionToCellPosition(this Tilemap tilemap, Vector3 worldPosition)
-    {
-        var cellPosition = tilemap.WorldToCell(worldPosition);
-        cellPosition.z = 0;
-        return cellPosition;
     }
 
     public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)

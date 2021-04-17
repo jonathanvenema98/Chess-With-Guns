@@ -12,7 +12,7 @@ public class MapEditorUI : Singleton<MapEditorUI>
     [SerializeField] private Sprite paintSprite;
     [SerializeField] private Vector2 eraseSpriteHotspot;
     [SerializeField] private Sprite eraseSprite;
-
+    
     [SerializeField] private GameObject ingameUI;
     
     [SerializeField] private GameObject border;
@@ -106,6 +106,10 @@ public class MapEditorUI : Singleton<MapEditorUI>
 
         piecesMenu = UIBuilder.Of(Size.Partial)
             .HeirarchyName("Piece Menu")
+            .Modules(SaveSystem.Pieces
+                .Select(piece => 
+                    ButtonModule.Of(piece.Sprite, _ => SetCurrentPiece(piece)))
+                .ToArray<Module>())
             .Build();
 
         var currentItemMenu = UIBuilder.Of(Size.Partial)
@@ -153,6 +157,12 @@ public class MapEditorUI : Singleton<MapEditorUI>
         currentImage.sprite = tile.Sprite;
     }
 
+    private void SetCurrentPiece(Piece piece)
+    {
+        MapEditorController.CurrentPiece = piece;
+        currentImage.sprite = piece.Sprite;
+    }
+
     private void DisplaySaveMenu()
     {
         saveLevelMenu.SetActive(true);
@@ -162,7 +172,7 @@ public class MapEditorUI : Singleton<MapEditorUI>
     private void ClearLevel()
     {
         Confirmation.Confirm("Are you sure you want to clear the level?\nThis cannot be undone")
-            .OnConfirm(MapEditorController.Instance.ClearTilemap);
+            .OnConfirm(MapEditorController.Instance.ClearLevel);
     }
 
     private void SaveLevel(GameObject modules)
@@ -251,6 +261,9 @@ public class MapEditorUI : Singleton<MapEditorUI>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            ToggleBrushMode();
+
         if (Utils.IsMouseOverUI())
             return;
         
@@ -260,5 +273,14 @@ public class MapEditorUI : Singleton<MapEditorUI>
             borderBoardPosition = boardPosition;
             border.transform.position = BoardController.BoardPositionToWorldPosition(boardPosition);
         }
+    }
+
+    private void ToggleBrushMode()
+    {
+        var newBrushMode = MapEditorController.CurrentBrushMode == BrushMode.Paint
+            ? BrushMode.Erase
+            : BrushMode.Paint;
+        
+        BrushModeInitialisers[newBrushMode].Invoke(this);
     }
 }

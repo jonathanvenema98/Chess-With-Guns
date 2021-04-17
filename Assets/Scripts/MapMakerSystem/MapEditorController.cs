@@ -8,9 +8,12 @@ using UnityEngine.Tilemaps;
 using UnityTileData = UnityEngine.Tilemaps.TileData;
 
 [ExecuteAlways]
-public class MapEditorController : Singleton<MapEditorController>, ITilemapDriver
+public class MapEditorController : Singleton<MapEditorController>, ISaveLevelDriver, ILoadLevelDriver
 {
+    [SerializeField] private Transform pieceParent;
+    
     private List<TileData> changedTiles;
+    private Dictionary<Vector3Int, Piece> pieces;
 
     private bool MadeChanges => changedTiles.Count != 0;
     private string Filename => $"{GetInstanceID()}";
@@ -19,6 +22,7 @@ public class MapEditorController : Singleton<MapEditorController>, ITilemapDrive
     public static BrushMode CurrentBrushMode { get; set; }
     public static EditMode CurrentEditMode { get; set; }
     public static HeightTile CurrentTile { get; set; }
+    public static Piece CurrentPiece { get; set; }
 
     // Start is called before the first frame update
     private void Start()
@@ -29,6 +33,7 @@ public class MapEditorController : Singleton<MapEditorController>, ITilemapDrive
         if (Application.isPlaying)
         {
             changedTiles = new List<TileData>();
+            pieces = new Dictionary<Vector3Int, Piece>();
         }
         else if (Application.isEditor && SaveSystem.FileExists(Filename))
         {
@@ -54,7 +59,7 @@ public class MapEditorController : Singleton<MapEditorController>, ITilemapDrive
 
     private void PlaceTile()
     {
-        var cellPosition = Tilemap.WorldPositionToCellPosition(Utils.MouseWorldPosition);
+        var cellPosition = BoardController.WorldPositionToCellPosition(Utils.MouseWorldPosition);
         
         TileBase tile = CurrentBrushMode == BrushMode.Paint
             ? CurrentTile : null;
@@ -66,24 +71,62 @@ public class MapEditorController : Singleton<MapEditorController>, ITilemapDrive
 
     private void PlacePiece()
     {
-        
+        var cellPosition = BoardController.WorldPositionToCellPosition(Utils.MouseWorldPosition);
+        if (CurrentBrushMode == BrushMode.Paint)
+        {
+            if (pieces.TryGetValue(cellPosition, out Piece piece))
+            {
+                if (piece == CurrentPiece)
+                    return;
+
+                Destroy(piece.gameObject);
+            }
+
+            pieces[cellPosition] = CurrentPiece.Instantiate(pieceParent);
+            pieces[cellPosition].BoardPosition = BoardController.V3ToV2(cellPosition);
+            pieces[cellPosition].transform.position = BoardController.CellPositionToWorldPosition(cellPosition);
+        }
+        else if (pieces.TryGetValue(cellPosition, out Piece piece))
+        {
+            pieces.Remove(cellPosition);
+            Destroy(piece.gameObject);
+        }
     }
 
+    #region LoadSaveLevelDrivers
+
     [InspectorButton]
-    public void ClearTilemap()
+    public void ClearLevel()
     {
         changedTiles.Clear();
         changedTiles.Add(TileData.ClearTilemap);
         Tilemap.ClearAllTiles();
+        
+        pieces.ForEach(pair => Destroy(pair.Value.gameObject));
+        pieces.Clear();
     }
 
-    public void SetTile(Vector3Int position, TileBase tile)
+    public void SetTile(Vector3Int cellPosition, TileBase tile)
     {
-        Tilemap.SetTile(position, tile);
+        Tilemap.SetTile(cellPosition, tile);
         string tileName = tile == null ? null : tile.name;
-        changedTiles.Add(new TileData(position, tileName));
+        changedTiles.Add(new TileData(cellPosition, tileName));
     }
-    
+
+    public IEnumerable<Piece> GetPieces()
+    {
+        return pieces.Values.ToList();
+    }
+
+    public void SetPiece(Vector3Int cellPosition, Piece piece)
+    {
+        pieces[cellPosition] = piece.Instantiate(pieceParent);
+        pieces[cellPosition].BoardPosition = BoardController.V3ToV2(cellPosition);
+        pieces[cellPosition].transform.position = BoardController.CellPositionToWorldPosition(cellPosition);
+    }
+
+    #endregion
+
     private void ApplyChanges()
     {
         if (Tilemap == null)
@@ -97,8 +140,8 @@ public class MapEditorController : Singleton<MapEditorController>, ITilemapDrive
                 Tilemap.ClearAllTiles();
             else
             {
-                Tilemap.SetTile(tileData.TilePosition,
-                    string.IsNullOrEmpty(tileData.TileName) ? null : tiles[tileData.TileName]);
+                Tilemap.SetTile(tileData.CellPosition,
+                    string.IsNullOrEmpty(tileData.Name) ? null : tiles[tileData.Name]);
             }
         }
 
