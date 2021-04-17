@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class BoardController : Singleton<BoardController>
 {
-	[SerializeField] private int unitsPerTile = 4;
+	[SerializeField] private int unitsPerTile;
 	[SerializeField] private Tilemap boardTilemap;
 
 	[SerializeField] private string levelName;
@@ -21,31 +21,27 @@ public class BoardController : Singleton<BoardController>
 	public static float HalfUnitsPerTile { get; private set; }
 	public static Vector3 WorldOffset { get; private set; }
 	public static Tilemap BoardTilemap { get; private set; }
-
-	// Use this for initialization
-	private new void Awake()
+	
+	public void Initialise()
 	{
-		base.Awake();
-		
-		Initialise();
+		UnitsPerTile = Instance.unitsPerTile;
+		HalfUnitsPerTile = UnitsPerTile / 2F;
+		WorldOffset = Vector3.up * HalfUnitsPerTile / 4F;
+		BoardTilemap = boardTilemap;
 	}
 
-	private void Initialise()
+	public void LoadLevel(string level)
 	{
-		var levelData = SaveSystem.LoadLevel(TilemapDriver.Of(boardTilemap), levelName);
+		var levelData = SaveSystem.LoadLevel(TilemapDriver.Of(boardTilemap), level);
 		var boardSize = V3ToV2(levelData.TilemapSize);
 		
 		board = new IBoardItem[boardSize.x, boardSize.y];
 		int boardLength = Mathf.Max(boardSize.x, boardSize.y);
 		
+		Debug.Log(board.Length);
+		
 		BoardSize = boardSize;
 		BoardLength = boardLength;
-		UnitsPerTile = Instance.unitsPerTile;
-		HalfUnitsPerTile = UnitsPerTile / 2F;
-		WorldOffset = Vector3.up * HalfUnitsPerTile / 4F;
-		BoardTilemap = boardTilemap;
-
-		boardTilemap.layoutGrid.cellSize = new Vector3(UnitsPerTile, HalfUnitsPerTile, UnitsPerTile);
 	}
 
 	public static IBoardItem GetBoardItemAt(Vector2Int boardPosition)

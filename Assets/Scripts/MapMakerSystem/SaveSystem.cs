@@ -8,8 +8,11 @@ using UnityEngine.Tilemaps;
 
 public class SaveSystem : Singleton<SaveSystem>
 {
+    [SerializeField] private List<HeightTile> tiles;
     [SerializeField] private Grid gridPalette;
 
+    public static List<HeightTile> Tiles => Instance.tiles;
+    
     #region FileIO
     
     public static string Directory => "Assets\\Files\\";
@@ -116,7 +119,7 @@ public class SaveSystem : Singleton<SaveSystem>
         }
 
         var levelData = LoadData<LevelData>(levelName);
-        var tiles = GetTilePalette();
+        var tiles = CreateTileMappings();
         
         //Centres the loaded board
         Vector3Int tilePositionOffset = levelData.TilemapSize / 2 + levelData.TilemapOrigin;
@@ -143,24 +146,38 @@ public class SaveSystem : Singleton<SaveSystem>
     {
         Debug.LogWarning($"Couldn't find the tile: {tilename}");
     }
-    
-    public static Dictionary<string, TileBase> GetTilePalette()
+
+    public static Dictionary<string, TileBase> CreateTileMappings()
     {
         var tiles = new Dictionary<string, TileBase>();
-        if (Instance.gridPalette != null)
+        if (Tiles != null)
         {
-            Tilemap tilemapPalette = Instance.gridPalette.GetComponentInChildren<Tilemap>();
-            if (tilemapPalette != null)
+            foreach (var tile in Tiles)
             {
-                tilemapPalette
-                    .GetAllTilePositions()
-                    .Select(position => tilemapPalette.GetTile(position))
-                    .ForEach(tile => tiles.Add(tile.name, tile));
+                tiles.Add(tile.name, tile);
             }
         }
 
         return tiles;
     }
+    
+    // public static Dictionary<string, TileBase> GetTilePalette()
+    // {
+    //     var tiles = new Dictionary<string, TileBase>();
+    //     if (Instance.gridPalette != null)
+    //     {
+    //         Tilemap tilemapPalette = Instance.gridPalette.GetComponentInChildren<Tilemap>();
+    //         if (tilemapPalette != null)
+    //         {
+    //             tilemapPalette
+    //                 .GetAllTilePositions()
+    //                 .Select(position => tilemapPalette.GetTile(position))
+    //                 .ForEach(tile => tiles.Add(tile.name, tile));
+    //         }
+    //     }
+    //
+    //     return tiles;
+    // }
     
     #endregion
 

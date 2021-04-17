@@ -51,6 +51,14 @@ public class GameController : Singleton<GameController>
 			NextRound();
 	}
 
+	private new void Awake()
+	{
+		base.Awake();
+		
+		BoardController.Instance.Initialise();
+		BoardController.Instance.LoadLevel("Symmetrical Level");
+	}
+
 	// Use this for initialization
 	private void Start ()
 	{

@@ -748,7 +748,7 @@ MonoBehaviour:
   normalKeyMoveSensitivity: 0
   fastKeyMoveSensitivity: 0
   usePanning: 0
-  panMoveSpeed: 0
+  panMoveSensitivity: 0
   panBorder: {x: 0, y: 0}
   focusedZoom: 8
   unFocusThreshold: 4
@@ -1565,6 +1565,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8583e138a66ac0c46871a75026f6ebdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: e8d30f699c6946d47874e7da142c9189, type: 2}
+  - {fileID: 11400000, guid: 6eaa3afecffa6544b8442d349eec8455, type: 2}
+  - {fileID: 11400000, guid: 1845f72f3e456704eb0ca1c6c5ab65d4, type: 2}
+  - {fileID: 11400000, guid: 92a7b7bec7973bd408c2594b97513abc, type: 2}
+  - {fileID: 11400000, guid: e17af1cf67dafaf48a41ff83976b91e1, type: 2}
+  - {fileID: 11400000, guid: b214a058188e1904e8fd14e4fb73f3c3, type: 2}
   gridPalette: {fileID: 2569400265392217204, guid: b0b87f2bb4763674f86c6d6e0a521476,
     type: 3}
 --- !u!114 &1604021174

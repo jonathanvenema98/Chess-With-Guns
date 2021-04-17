@@ -17,6 +17,7 @@ public class HeightTile : TileBase
     
     public TileHeight Height => height;
     public TerrainType TerrainType => terrainType;
+    public Sprite Sprite => sprite;
     
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref UnityEngine.Tilemaps.TileData tileData)
     {

@@ -1,17 +1,72 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MapEditorUI : MonoBehaviour
+public class MapEditorUI : Singleton<MapEditorUI>
 {
+    [SerializeField] private Sprite tileMenuSprite;
+    [SerializeField] private Sprite pieceMenuSprite;
+    [SerializeField] private Vector2 paintSpriteHotSpot;
+    [SerializeField] private Sprite paintSprite;
+    [SerializeField] private Vector2 eraseSpriteHotspot;
+    [SerializeField] private Sprite eraseSprite;
+
     [SerializeField] private GameObject ingameUI;
     
+    [SerializeField] private GameObject border;
+    private Vector2Int borderBoardPosition;
+    
+    private Image currentImage;
+
     private GameObject saveLevelMenu;
     private GameObject loadLevelMenu;
+    
+    private GameObject tileMenu;
+    private GameObject piecesMenu;
 
+    private static readonly Dictionary<EditMode, Action<MapEditorUI>> EditModeInitialisers =
+        new Dictionary<EditMode, Action<MapEditorUI>>
+        {
+            {
+                EditMode.Tiles, ui =>
+                {
+                    ui.ToggleMenu(ui.tileMenu, EditMode.Tiles);
+                    ui.SetCurrentTile(SaveSystem.Tiles.First());
+                }
+            },
+            {
+                EditMode.Pieces, ui =>
+                {
+                    ui.ToggleMenu(ui.piecesMenu, EditMode.Pieces);
+                }
+            }
+        };
+    
+    private static readonly Dictionary<BrushMode, Action<MapEditorUI>> BrushModeInitialisers =
+        new Dictionary<BrushMode, Action<MapEditorUI>>
+        {
+            {
+                BrushMode.Paint, ui =>
+                {
+                    MapEditorController.CurrentBrushMode = BrushMode.Paint;
+                    Cursor.SetCursor(ui.paintSprite.texture, ui.paintSpriteHotSpot, CursorMode.Auto);
+                }
+            },
+            {
+                BrushMode.Erase, ui =>
+                {
+                    MapEditorController.CurrentBrushMode = BrushMode.Erase;
+                    Cursor.SetCursor(ui.eraseSprite.texture, ui.eraseSpriteHotspot, CursorMode.Auto);
+                }
+            }
+        };
+    
     private void Start()
     {
         UIController.GenerateUI("Button Menu", ingameUI.transform,
-            UIController.Size.Partial, UIController.Anchor.TopLeft, 170F,
+            Size.Partial, Anchor.TopLeft, 170F,
             TextModule.Title("Controls", 22F),
             LineModule.Create(),
             ButtonModule.Of("Save Level", _ => DisplaySaveMenu()),
@@ -40,18 +95,74 @@ public class MapEditorUI : MonoBehaviour
                     .OnConfirm(LoadLevel)
                     .OnCancel(HideMenu),
                 TextModule.Message());
+
+        tileMenu = UIBuilder.Of(Size.Partial)
+            .HeirarchyName("Tile Menu")
+            .Modules(SaveSystem.Tiles
+                .Select(tile =>
+                    ButtonModule.Of(tile.Sprite, _ => SetCurrentTile(tile)))
+                .ToArray<Module>())
+            .Build();
+
+        piecesMenu = UIBuilder.Of(Size.Partial)
+            .HeirarchyName("Piece Menu")
+            .Build();
+
+        var currentItemMenu = UIBuilder.Of(Size.Partial)
+            .HeirarchyName("Current Item")
+            .Modules(
+                LineModule.Create(),
+                TextModule.Title("Current Item"),
+                ImageModule.Of())
+            .Build();
+
+        currentImage = currentItemMenu.GetComponentInChildren<ImageModule>().Image;
+
+        UIBuilder.Of(Size.Partial, ingameUI.transform)
+            .HeirarchyName("Edit Level Menu")
+            .Anchor(Anchor.TopRight)
+            .Width(200F)
+            .Modules(
+                TextModule.Title("Edit Level"),
+                HorizontalModule.Of(30F,
+                    ButtonModule.Of(paintSprite, _ => BrushModeInitialisers[BrushMode.Paint].Invoke(this)),
+                    ButtonModule.Of(eraseSprite, _ => BrushModeInitialisers[BrushMode.Erase].Invoke(this))),
+                LineModule.Create(),
+                HorizontalModule.Of(
+                    ButtonModule.Of(tileMenuSprite, _ => EditModeInitialisers[EditMode.Tiles].Invoke(this)),
+                    ButtonModule.Of(pieceMenuSprite, _ => EditModeInitialisers[EditMode.Pieces].Invoke(this))),
+                LineModule.Create())
+            .Include(tileMenu, piecesMenu)
+            .Include(currentItemMenu);
+        
+        EditModeInitialisers[EditMode.Tiles].Invoke(this);
+        Cursor.SetCursor(paintSprite.texture, paintSpriteHotSpot, CursorMode.Auto);
     }
 
-    public void DisplaySaveMenu()
+    private void ToggleMenu(GameObject activeMenu, EditMode newEditMode)
+    {
+        tileMenu.SetActive(false);
+        piecesMenu.SetActive(false);
+        activeMenu.SetActive(true);
+        MapEditorController.CurrentEditMode = newEditMode;
+    }
+
+    private void SetCurrentTile(HeightTile tile)
+    {
+        MapEditorController.CurrentTile = tile;
+        currentImage.sprite = tile.Sprite;
+    }
+
+    private void DisplaySaveMenu()
     {
         saveLevelMenu.SetActive(true);
         ingameUI.SetActive(false);
     }
 
-    public void ClearLevel()
+    private void ClearLevel()
     {
         Confirmation.Confirm("Are you sure you want to clear the level?\nThis cannot be undone")
-            .OnConfirm(PlaymodeTilemapEditor.Instance.ClearTilemap);
+            .OnConfirm(MapEditorController.Instance.ClearTilemap);
     }
 
     private void SaveLevel(GameObject modules)
@@ -62,7 +173,7 @@ public class MapEditorUI : MonoBehaviour
         void Save()
         {
             HideMenu(modules);
-            SaveSystem.SaveLevel(PlaymodeTilemapEditor.Instance, filename);
+            SaveSystem.SaveLevel(MapEditorController.Instance, filename);
             UIController.GeneratePopup("The level has been saved", 2);
         }
         
@@ -104,7 +215,7 @@ public class MapEditorUI : MonoBehaviour
         void Load()
         {
             HideMenu(modules);
-            SaveSystem.LoadLevel(PlaymodeTilemapEditor.Instance, filename);
+            SaveSystem.LoadLevel(MapEditorController.Instance, filename);
             
             string message = SaveSystem.SuccessfullyLoaded
                 ? "Level has been successfully loaded!"
@@ -125,7 +236,7 @@ public class MapEditorUI : MonoBehaviour
             return;
         }
 
-        if (!PlaymodeTilemapEditor.Instance.Tilemap.IsEmpty())
+        if (!MapEditorController.Instance.Tilemap.IsEmpty())
         {
             HideMenu(modules);
             Confirmation.Confirm(
@@ -136,5 +247,18 @@ public class MapEditorUI : MonoBehaviour
         }
 
         Load();
+    }
+
+    private void Update()
+    {
+        if (Utils.IsMouseOverUI())
+            return;
+        
+        var boardPosition = BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition);
+        if (boardPosition != borderBoardPosition)
+        {
+            borderBoardPosition = boardPosition;
+            border.transform.position = BoardController.BoardPositionToWorldPosition(boardPosition);
+        }
     }
 }

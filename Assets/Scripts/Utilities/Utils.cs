@@ -42,7 +42,7 @@ public class Utils : Singleton<Utils>
 
     public static Vector3 MouseWorldPosition => mainCamera.ScreenToWorldPoint(Input.mousePosition);
     
-    public static bool IsPointerOverUIObject()
+    public static bool IsMouseOverUI()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);

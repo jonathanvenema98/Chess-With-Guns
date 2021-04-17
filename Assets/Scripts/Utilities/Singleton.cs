@@ -9,11 +9,7 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         // ReSharper disable Unity.PerformanceAnalysis
         get
         {
-            #if UNITY_EDITOR
-            if (Application.isEditor)
-                instance = FindObjectOfType<T>();
-            #endif
-            
+            instance = FindObjectOfType<T>();
             if (instance == null)
                 CreateInstance();
             return instance;
@@ -26,7 +22,7 @@ public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
         {
             instance = (T)this;
         }
-        else
+        else if (instance != this)
         {
             Destroy(this);
         }

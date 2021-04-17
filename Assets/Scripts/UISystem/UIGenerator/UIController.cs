@@ -13,9 +13,14 @@ public class UIController : Singleton<UIController>
     [SerializeField] private ConfirmationModule confirmationModulePrefab;
     [SerializeField] private TextModule textModulePrefab;
     [SerializeField] private ButtonModule buttonModulePrefab;
+    [SerializeField] private ButtonModule spriteButtonModulePrefab;
     [SerializeField] private SpacerModule spacerModulePrefab;
+    [SerializeField] private HorizontalModule horizontalModulePrefab;
+    [SerializeField] private ImageModule imageModulePrefab;
     
     public static Transform UIParent => Instance.uiParent;
+    public static GameObject FullScreenUIPrefab => Instance.fullScreenUIPrefab;
+    public static GameObject PopupUIPrefab => Instance.popupUIPrefab;
     public static GameObject CreateFullScreenUI => Instantiate(Instance.fullScreenUIPrefab, UIParent);
     public static GameObject CreatePopupUI => Instantiate(Instance.popupUIPrefab, UIParent);
 
@@ -24,11 +29,14 @@ public class UIController : Singleton<UIController>
     public static TextModule CreateTextModule => Instantiate(Instance.textModulePrefab);
     public static LineModule CreateLineModule => Instantiate(Instance.lineModulePrefab);
     public static ButtonModule CreateButtonModule => Instantiate(Instance.buttonModulePrefab);
+    public static ButtonModule CreateSpriteButtonModule => Instantiate(Instance.spriteButtonModulePrefab);
     public static SpacerModule CreateSpacerModule => Instantiate(Instance.spacerModulePrefab);
-
+    public static HorizontalModule CreateHorizontalModule => Instantiate(Instance.horizontalModulePrefab);
+    public static ImageModule CreateImageModule => Instantiate(Instance.imageModulePrefab);
+    
     public static bool IsUIActive { get; set; }
 
-    private static readonly Dictionary<Anchor, Action<RectTransform>> GetAnchorSetter =
+    public static readonly Dictionary<Anchor, Action<RectTransform>> GetAnchorSetter =
         new Dictionary<Anchor, Action<RectTransform>>
         {
             {Anchor.TopLeft, rectTransform =>
@@ -92,6 +100,16 @@ public class UIController : Singleton<UIController>
                 rectTransform.pivot = new Vector2(0.5F, 0.5F);
             }}
         };
+
+    public static GameObject GetSizePrefab(Size size)
+    {
+        return size switch
+        {
+            Size.Fullscreen => FullScreenUIPrefab,
+            Size.Partial => PopupUIPrefab,
+            _ => PopupUIPrefab
+        };
+    }
     
     public static GameObject GenerateUI(string name, Transform parent, Size size, Anchor anchor, float width, params Module[] modules)
     {
@@ -104,7 +122,7 @@ public class UIController : Singleton<UIController>
         
         return GenerateUI(container, modules);
     }
-    
+
     public static GameObject GenerateFullScreenUI(string name, params Module[] modules)
     {
         var container = CreateFullScreenUI;
@@ -114,9 +132,8 @@ public class UIController : Singleton<UIController>
         return GenerateUI(container, modules);
     }
 
-    private static GameObject GenerateUI(GameObject container, params Module[] modules)
+    public static GameObject GenerateUI(GameObject container, params Module[] modules)
     {
-
         foreach (var module in modules)
         {
             module.transform.SetParent(container.transform);
@@ -171,14 +188,14 @@ public class UIController : Singleton<UIController>
     {
         Destroy(modules);
     }
+}
 
-    public enum Size
-    {
-        Fullscreen, Partial
-    }
+public enum Size
+{
+    Fullscreen, Partial
+}
 
-    public enum Anchor
-    {
-        TopLeft, TopCentre, TopRight, CentreLeft, Centre, CentreRight, BottomLeft, BottomCentre, BottomRight, Fill
-    }
+public enum Anchor
+{
+    TopLeft, TopCentre, TopRight, CentreLeft, Centre, CentreRight, BottomLeft, BottomCentre, BottomRight, Fill
 }

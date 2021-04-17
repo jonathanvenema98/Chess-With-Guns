@@ -54,10 +54,11 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     {
         keyMoveSpeed = Input.GetKey(KeyCode.LeftShift) ? fastKeyMoveSensitivity : normalKeyMoveSensitivity;
 
-        if (UIController.IsUIActive)
-            return;
-        
-        UpdateFunctionality();
+        if (!Utils.IsMouseOverUI())
+        {
+            UpdateFunctionality();
+        }
+
         RestrictZoom();
         RestrictMovement();
         
@@ -87,7 +88,7 @@ public abstract class AbstractCameraController<T> : Singleton<T> where T: Single
     {
         //Panning
         if (usePanning && Input.mousePosition.x >= 0 && Input.mousePosition.x < Screen.width
-            && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height && !Utils.IsPointerOverUIObject())
+            && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height)
         {
             
             if (Input.mousePosition.y > Screen.height - panBorder.y)
