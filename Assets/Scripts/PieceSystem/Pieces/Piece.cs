@@ -45,9 +45,13 @@ public abstract class Piece : MonoBehaviour, IBoardItem
         }
     }
 
-    public virtual void OnPieceMove() { } 
-    
-    public virtual void OnDeath() { }
+    public virtual void OnPieceMove() { }
+
+    public virtual void OnDeath()
+    {
+        BoardController.RemoveBoardItemAt(BoardPosition);
+        Destroy(gameObject);
+    }
 
     public Piece Instantiate(Transform parent)
     {

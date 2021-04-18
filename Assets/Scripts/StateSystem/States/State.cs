@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-public abstract class State
+﻿public abstract class State
 {
 	public virtual void OnStart()
 	{
@@ -12,15 +10,5 @@ public abstract class State
 
 	public virtual void OnExit()
 	{
-	}
-
-	public virtual IEnumerator OnMove()
-	{
-		yield break;
-	}
-
-	public virtual IEnumerator OnAttack()
-	{
-		yield break;
 	}
 }

@@ -9,6 +9,8 @@ public class Utils : Singleton<Utils>
     public const int PixelsPerUnit = 16;
     public const float Pixel = 1F / PixelsPerUnit;
     public const double FloatingPointTolerance = 1e-5D;
+
+    public static readonly Vector2Int Empty = new Vector2Int(-1, -1);
     
     private static Camera mainCamera;
     

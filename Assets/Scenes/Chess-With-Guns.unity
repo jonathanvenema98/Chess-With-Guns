@@ -1949,11 +1949,11 @@ GameObject:
   - component: {fileID: 1604021169}
   - component: {fileID: 1604021168}
   - component: {fileID: 1604021170}
-  - component: {fileID: 1604021171}
   - component: {fileID: 1604021172}
   - component: {fileID: 1604021173}
   - component: {fileID: 1604021175}
   - component: {fileID: 1604021174}
+  - component: {fileID: 1604021171}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1973,9 +1973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1192cc47a293f5c4b8c16bbe4707882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piece: {fileID: 0}
-  target: {x: 1, y: 1}
+  teams: 0000000001000000
   focusedTileColour: {r: 1, g: 0.8699023, b: 0.19215685, a: 1}
+  moveTileColour: {r: 0.46588477, g: 0.9150943, b: 0.41006586, a: 1}
+  attackTileColour: {r: 0.8962264, g: 0.30015132, b: 0.30015132, a: 1}
   gameMode: 0
 --- !u!4 &1604021169
 Transform:
@@ -2006,7 +2007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitsPerTile: 6
   boardTilemap: {fileID: 1414245836}
-  pieceParent: {fileID: 0}
+  pieceParent: {fileID: 1075482199}
   tileBordersParent: {fileID: 544473443}
   tileBorderPrefab: {fileID: 5556310029466643563, guid: defbce369a5dbed448bce2522da0b749,
     type: 3}
@@ -2019,7 +2020,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1604021167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec56db9a1a442f7b1da3f040eca4864, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fb65fd8c49b48468f21e8658b9b2d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1604021172

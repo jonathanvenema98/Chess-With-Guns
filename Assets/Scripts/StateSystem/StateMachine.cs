@@ -1,4 +1,4 @@
-public abstract class StateMachine : Singleton<StateMachine>
+public class StateMachine : Singleton<StateMachine>
 {
     public State State { get; private set; }
 

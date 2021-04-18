@@ -16,4 +16,10 @@ public class General : Piece
             .AnyDirection(1, ActionOption.IsEnemy | ActionOption.UntilBlocked)
             .Build();
     }
+
+    public override void OnDeath()
+    {
+        StateMachine.Instance.SetState(new GameOverState());
+        base.OnDeath();
+    }
 }

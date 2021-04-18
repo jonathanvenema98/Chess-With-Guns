@@ -261,7 +261,7 @@ public class MapEditorUI : Singleton<MapEditorUI>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !Utils.IsMouseOverUI())
             ToggleBrushMode();
 
         if (Utils.IsMouseOverUI())

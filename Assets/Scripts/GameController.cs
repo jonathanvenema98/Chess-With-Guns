@@ -1,13 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : Singleton<GameController>
 {
-	
-	[SerializeField] private Piece piece;
-	[SerializeField] private Vector2Int target;
+	[SerializeField] private List<Team> teams;
 
 	[SerializeField] private Color focusedTileColour;
+	[SerializeField] private Color moveTileColour;
+	[SerializeField] private Color attackTileColour;
 	[SerializeField] private GameMode gameMode;
 	
 	public static int Round { get; private set; }
@@ -17,27 +17,10 @@ public class GameController : Singleton<GameController>
 	public static bool FirstRound => Round == 1;
 
 	public static Color FocusedTileColour => Instance.focusedTileColour;
+	public static Color MoveTileColour => Instance.moveTileColour;
+	public static Color AttackTileColour => Instance.attackTileColour;
 
 	public static GameMode GameMode => Instance.gameMode;
-
-	[InspectorButton]
-	private void MoveToTarget()
-	{
-		if (piece.GetMoves().Contains(target))
-		{
-			BoardController.MoveBoardItemTo(piece, target);
-		}
-	}
-
-	[InspectorButton]
-	private void LogMoves()
-	{
-		ActionBuilder.For(piece)
-			.Straight(1, ActionOption.IsUnoccupied | ActionOption.ValidTerrainType | ActionOption.UntilBlocked)
-			.Build()
-			.ForEach(action => Debug.Log(action));
-
-	}
 
 	public static void NextRound()
 	{
@@ -51,46 +34,25 @@ public class GameController : Singleton<GameController>
 			NextRound();
 	}
 
+	public static Team GetNextTeam(Team team)
+	{
+		int index = Instance.teams.IndexOf(team);
+		index++;
+		if (index == Instance.teams.Count)
+			index = 0;
+
+		return Instance.teams[index];
+	}
+
 	private new void Awake()
 	{
 		base.Awake();
-		
-		BoardController.Instance.Initialise();
-		BoardController.Instance.LoadLevel("Symmetrical Level");
+		StateMachine.Instance.SetState(new BeginState());
 	}
 
-	// Use this for initialization
-	private void Start ()
-	{
-	}
-	
 	// Update is called once per frame
 	private void Update ()
 	{
-        // if (Input.GetMouseButtonDown(Utils.LeftMouseButton))
-        // {
-        // 	Vector2Int boardPosition = BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition);
-        // 	if (piece.GetMoves().Contains(boardPosition))
-        // 	{
-        // 		BoardController.MoveBoardItemTo(piece, boardPosition);
-        // 	}
-        // }
 
-
-        //    Example function call
-        if (Input.GetMouseButtonDown(Utils.RightMouseButton))
-        {
-            //Debug.Log(BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition));
-            FadingUIManager.Instance.CreateFadingText(
-                BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition),
-                "Red text message", Color.red);
-        }
-        if(Input.GetMouseButtonDown(Utils.LeftMouseButton))
-		{
-			//Debug.Log(BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition));
-			FadingUIManager.Instance.CreateFadingText(
-				BoardController.WorldPositionToBoardPosition(Utils.MouseWorldPosition),
-				"Blue 2s text message", Color.blue, 2.0f);
-		}
 	}
 }
