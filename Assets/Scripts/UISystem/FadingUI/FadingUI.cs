@@ -9,7 +9,7 @@ public class FadingUI : MonoBehaviour
     private Color color;
     private TMP_Text text;
 
-    public void Initialise(float fadingDuration)
+    public void Initialise(float fadingDuration = 1.0f)
     {
         this.fadingDuration = fadingDuration;
         text = GetComponent<TMP_Text>();
