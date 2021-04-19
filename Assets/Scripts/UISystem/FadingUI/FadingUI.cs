@@ -9,12 +9,24 @@ public class FadingUI : MonoBehaviour
     private Color color;
     private TMP_Text text;
 
-    public void Initialise(float fadingDuration = 1.0f)
+    private float speed;
+    private Vector3 direction;
+
+    public void Initialise(float speed, Vector3 direction, float fadingDuration = 1.0f)
     {
+        this.speed = speed;
+        this.direction = direction;
         this.fadingDuration = fadingDuration;
         text = GetComponent<TMP_Text>();
         
         StartCoroutine(Fade());
+    }
+
+    void Update()
+    {
+        float translation = speed * Time.deltaTime;
+
+        transform.Translate(direction * translation);
     }
 
     private IEnumerator Fade()
