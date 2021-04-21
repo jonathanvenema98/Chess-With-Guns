@@ -2089,6 +2089,10 @@ MonoBehaviour:
   pieces:
   - {fileID: 6781465974270406483, guid: 80921f75507516f4fa88c26d77e0e3fd, type: 3}
   - {fileID: 2038655473569204014, guid: 7f3ecde65f02cde4fb22a2306f756df6, type: 3}
+  - {fileID: 1779800702917489234, guid: 93a76b50b5379154790318a414c87c5e, type: 3}
+  - {fileID: 4829461564430735127, guid: 61f3278b424dd1144af1879850d071be, type: 3}
+  - {fileID: 8847757420559131826, guid: 3f006a9915ee4f0408e5be1103637fe4, type: 3}
+  - {fileID: 8016130226518842683, guid: 536274e92b1368b4fb77f80c847ea572, type: 3}
 --- !u!114 &1406918084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2226,7 +2230,7 @@ MonoBehaviour:
   minZoom: 6
   normalKeyMoveSensitivity: 0.5
   fastKeyMoveSensitivity: 1
-  usePanning: 1
+  usePanning: 0
   panMoveSensitivity: 0.25
   panBorder: {x: 50, y: 30}
 --- !u!1 &1823735702

@@ -592,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1856558073}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589756712
 GameObject:
@@ -1032,7 +1032,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1856558073}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1124668568
 GameObject:
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teams: 0000000001000000
   focusedTileColour: {r: 1, g: 0.8699023, b: 0.19215685, a: 1}
-  moveTileColour: {r: 0.46588477, g: 0.9150943, b: 0.41006586, a: 1}
+  moveTileColour: {r: 0.13640302, g: 0.6320754, b: 0.07553097, a: 1}
   attackTileColour: {r: 0.8962264, g: 0.30015132, b: 0.30015132, a: 1}
   gameMode: 0
 --- !u!4 &1604021169
@@ -2057,6 +2057,10 @@ MonoBehaviour:
   pieces:
   - {fileID: 6781465974270406483, guid: 80921f75507516f4fa88c26d77e0e3fd, type: 3}
   - {fileID: 2038655473569204014, guid: 7f3ecde65f02cde4fb22a2306f756df6, type: 3}
+  - {fileID: 1779800702917489234, guid: 93a76b50b5379154790318a414c87c5e, type: 3}
+  - {fileID: 4829461564430735127, guid: 61f3278b424dd1144af1879850d071be, type: 3}
+  - {fileID: 8847757420559131826, guid: 3f006a9915ee4f0408e5be1103637fe4, type: 3}
+  - {fileID: 8016130226518842683, guid: 536274e92b1368b4fb77f80c847ea572, type: 3}
 --- !u!114 &1604021174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,8 +2197,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 183257642}
-  - {fileID: 1075482199}
   - {fileID: 544473443}
+  - {fileID: 1075482199}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -989,52 +989,106 @@
         <Team>Blue</Team>
         <CellPosition>
           <x>-4</x>
-          <y>1</y>
+          <y>3</y>
           <z>0</z>
         </CellPosition>
       </PieceData>
       <PieceData>
-        <Name>BlueGeneral</Name>
+        <Name>Blue Foot Soldier</Name>
         <Team>Blue</Team>
         <CellPosition>
-          <x>-4</x>
+          <x>-3</x>
+          <y>2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Blue Foot Soldier</Name>
+        <Team>Blue</Team>
+        <CellPosition>
+          <x>-2</x>
+          <y>2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Blue Foot Soldier</Name>
+        <Team>Blue</Team>
+        <CellPosition>
+          <x>-1</x>
+          <y>-2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Blue Foot Soldier</Name>
+        <Team>Blue</Team>
+        <CellPosition>
+          <x>-2</x>
+          <y>3</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Red Foot Soldier</Name>
+        <Team>Red</Team>
+        <CellPosition>
+          <x>2</x>
+          <y>-2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Red Foot Soldier</Name>
+        <Team>Red</Team>
+        <CellPosition>
+          <x>2</x>
+          <y>-3</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Red Foot Soldier</Name>
+        <Team>Red</Team>
+        <CellPosition>
+          <x>3</x>
+          <y>-2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Red Foot Soldier</Name>
+        <Team>Red</Team>
+        <CellPosition>
+          <x>1</x>
+          <y>2</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>RedGeneral</Name>
+        <Team>Red</Team>
+        <CellPosition>
+          <x>4</x>
+          <y>-3</y>
+          <z>0</z>
+        </CellPosition>
+      </PieceData>
+      <PieceData>
+        <Name>Blue Tank</Name>
+        <Team>Blue</Team>
+        <CellPosition>
+          <x>-2</x>
           <y>0</y>
           <z>0</z>
         </CellPosition>
       </PieceData>
       <PieceData>
-        <Name>BlueGeneral</Name>
-        <Team>Blue</Team>
-        <CellPosition>
-          <x>-4</x>
-          <y>-1</y>
-          <z>0</z>
-        </CellPosition>
-      </PieceData>
-      <PieceData>
-        <Name>RedGeneral</Name>
+        <Name>Red Tank</Name>
         <Team>Red</Team>
         <CellPosition>
-          <x>4</x>
-          <y>1</y>
-          <z>0</z>
-        </CellPosition>
-      </PieceData>
-      <PieceData>
-        <Name>RedGeneral</Name>
-        <Team>Red</Team>
-        <CellPosition>
-          <x>4</x>
+          <x>2</x>
           <y>0</y>
-          <z>0</z>
-        </CellPosition>
-      </PieceData>
-      <PieceData>
-        <Name>RedGeneral</Name>
-        <Team>Red</Team>
-        <CellPosition>
-          <x>4</x>
-          <y>-1</y>
           <z>0</z>
         </CellPosition>
       </PieceData>

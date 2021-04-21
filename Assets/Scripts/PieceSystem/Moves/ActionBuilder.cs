@@ -20,7 +20,7 @@ public class ActionBuilder
 			{ActionOption.IsFriendly,   builder => BoardController.IsFriendlyAt(builder.currentAction, builder.team)},
 			{ActionOption.IsObstacle,   builder => BoardController.IsObstacleAt(builder.currentAction)},
 			{ActionOption.IsUnoccupied, builder => !BoardController.IsBoardItemAt(builder.currentAction)},
-			{ActionOption.ValidTerrainType,    builder => BoardController.CanPieceMoveTo(builder.piece, builder.currentAction)},
+			{ActionOption.ValidTerrainType, builder => BoardController.CanPieceMoveTo(builder.piece, builder.currentAction)},
 			{ActionOption.UntilBlocked, builder => !builder.isBlocked}
 		};
 
@@ -72,7 +72,7 @@ public class ActionBuilder
 		isBlocked = false;
 		for (int i = 1; i <= spaces; i++)
 		{
-			currentAction = piece.BoardPosition + direction * spaces;
+			currentAction = piece.BoardPosition + direction * i;
 			if (BoardController.IsWithinBoard(currentAction) && (actionOptions == ActionOption.None
 			    || actionOptions.GetFlags()
 					.All(actionOption => ActionValidations[actionOption].Invoke(this))))

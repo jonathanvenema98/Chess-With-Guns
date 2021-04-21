@@ -21,59 +21,58 @@ public class PlayerTurnState : State
         Debug.Log($"Currently {currentTeam}'s turn");
         
         GameController.SetCurrentTeam(currentTeam);
-        InterfaceController.OnTileLeftClickedEvent += CameraController.Instance.OnTileLeftClickedSubscriber;
         InterfaceController.OnTileLeftClickedEvent += OnTileLeftClickedSubscriber;
     }
 
     public override void OnExit()
     {
-        InterfaceController.OnTileLeftClickedEvent -= CameraController.Instance.OnTileLeftClickedSubscriber;
         InterfaceController.OnTileLeftClickedEvent -= OnTileLeftClickedSubscriber;
         CameraController.Instance.UnfocusCamera();
     }
 
     private void OnTileLeftClickedSubscriber(Vector2Int boardPosition)
     {
+        HideAllBorders();
         if (currentPiecePosition == boardPosition)
         {
-            HideAllBorders();
             currentPiecePosition = Utils.Empty;
+            CameraController.Instance.UnfocusCamera();
         }
-        else if (currentPiecePosition != Utils.Empty)
+        else if (currentPiecePosition != Utils.Empty && currentMoves.Contains(boardPosition))
         {
-            if (currentMoves.Contains(boardPosition))
-            {
-                HideAllBorders();
-                UseAction();
-                currentPiecePosition = Utils.Empty;
-            
-                BoardController.MoveBoardItemTo(currentPiece, boardPosition);
-            }
+            UseAction();
+            currentPiecePosition = Utils.Empty;
+        
+            BoardController.MoveBoardItemTo(currentPiece, boardPosition);
+            CameraController.Instance.FocusCamera(boardPosition);
+        }
 
-            else if (currentAttacks.Contains(boardPosition))
-            {
-                HideAllBorders();
-                UseAction();
-                currentPiecePosition = Utils.Empty;
-            
-                Piece piece = BoardController.GetBoardItemAt<Piece>(boardPosition);
-                piece.TakeDamage(currentPiece.AttackDamage);
-                FadingUIManager.Instance.CreateFadingText(
-                    boardPosition,
-                    $"-{currentPiece.AttackDamage}",
-                    GameController.AttackTileColour);
-            }
+        else if (currentPiecePosition != Utils.Empty && currentAttacks.Contains(boardPosition))
+        {
+            UseAction();
+            currentPiecePosition = Utils.Empty;
+        
+            Piece piece = BoardController.GetBoardItemAt<Piece>(boardPosition);
+            piece.TakeDamage(currentPiece.AttackDamage);
+            FadingUIManager.Instance.CreateFadingText(
+                boardPosition,
+                $"-{currentPiece.AttackDamage}",
+                GameController.AttackTileColour);
         }
 
         else if (BoardController.IsFriendlyAt(boardPosition, currentTeam))
         {
-            HideAllBorders();
             currentPiece = BoardController.GetBoardItemAt<Piece>(boardPosition);
             currentPiecePosition = currentPiece.BoardPosition;
             currentMoves = currentPiece.GetMoves();
             currentAttacks = currentPiece.GetAttacks();
             
             DisplayAllBorders();
+            CameraController.Instance.FocusCamera(currentPiecePosition);
+        }
+        else //If you clicked on a random tile
+        {
+            currentPiecePosition = Utils.Empty;
         }
     }
 
@@ -97,6 +96,7 @@ public class PlayerTurnState : State
         Debug.Log($"Remaining actions: {remainingActions}");
         if (remainingActions == 0)
         {
+            CameraController.Instance.UnfocusCamera();
             StateMachine.Instance.SetState(new PlayerTurnState(GameController.GetNextTeam(currentTeam)));
         }
     }
