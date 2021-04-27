@@ -99,5 +99,19 @@ public class PlayerTurnState : State
             CameraController.Instance.UnfocusCamera();
             StateMachine.Instance.SetState(new PlayerTurnState(GameController.GetNextTeam(currentTeam)));
         }
+
+        // Every update, update values in UIUpdater to update Game HUD
+        //UIUpdater.SetTeam(currentTeam);
+        //UIUpdater.SetRemainingActions(remainingActions);
+    }
+
+    public int GetRemainingActions()
+    {
+        return remainingActions;
+    }
+
+    public Team GetTeam()
+    {
+        return currentTeam;
     }
 }
