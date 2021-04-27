@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    public GameObject gameUI;
+
     private State previousState;
 
     // Update is called once per frame
@@ -31,14 +33,16 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        gameUI.SetActive(true);
         //Time.timeScale = 1f;
         GameIsPaused = false;
         StateMachine.Instance.SetState(previousState);
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
+        gameUI.SetActive(false);
         //Time.timeScale = 0f;
         GameIsPaused = true;
         previousState = StateMachine.Instance.State;
